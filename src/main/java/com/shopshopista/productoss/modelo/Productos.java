@@ -5,6 +5,7 @@
  */
 package com.shopshopista.productoss.modelo;
 
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
  *
  * @author Linis
  */
+
 @Entity
 @Table(name="ProductosCategorias")
 public class Productos implements Serializable {
@@ -186,5 +188,5 @@ public class Productos implements Serializable {
     }
 
   
-    
+
 }

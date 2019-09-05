@@ -5,6 +5,7 @@
  */
 package com.shopshopista.productoss.modelo;
 
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,5 +36,5 @@ public class ProductosCategorias  {
     
     @Column(name="prca_activo", columnDefinition = "BOOLEAN DEFAUTL 'true'")
     private boolean prca_activo;
-    
+
 }
