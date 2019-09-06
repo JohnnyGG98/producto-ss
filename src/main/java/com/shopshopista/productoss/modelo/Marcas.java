@@ -5,10 +5,58 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Linis
  */
 public class Marcas {
+ 
+     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id_marca;
+    
+     private String marc_nombre;
+     private String marc_codigo;
+     private boolean marc_activo;
+
+    public Long getId_marca() {
+        return id_marca;
+    }
+
+    public void setId_marca(Long id_marca) {
+        this.id_marca = id_marca;
+    }
+
+    public String getMarc_nombre() {
+        return marc_nombre;
+    }
+
+    public void setMarc_nombre(String marc_nombre) {
+        this.marc_nombre = marc_nombre;
+    }
+
+    public String getMarc_codigo() {
+        return marc_codigo;
+    }
+
+    public void setMarc_codigo(String marc_codigo) {
+        this.marc_codigo = marc_codigo;
+    }
+
+    public boolean isMarc_activo() {
+        return marc_activo;
+    }
+
+    public void setMarc_activo(boolean marc_activo) {
+        this.marc_activo = marc_activo;
+    }
+     
+     
+    
+    
     
 }
