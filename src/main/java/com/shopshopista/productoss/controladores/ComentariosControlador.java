@@ -5,13 +5,18 @@
  */
 package com.shopshopista.productoss.controladores;
 
+import com.shopshopista.productoss.modelo.Categorias;
 import com.shopshopista.productoss.modelo.Comentarios;
 import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.repositorio.ComentariosRepositorio;
 import com.shopshopista.productoss.repositorio.ProductosRepositorio;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Daniel
  */
 @RestController
-@RequestMapping("/api/vi")
+@RequestMapping("/api/v1/comentario")
 public class ComentariosControlador {
     
      @Autowired
@@ -34,5 +39,17 @@ public class ComentariosControlador {
     @CrossOrigin
     public Comentarios guardar(@RequestBody @Valid Comentarios comentario) {
         return this.comentarioRepositorio.save(comentario);
+    }
+    
+     @GetMapping("/producto")
+    @CrossOrigin
+    public List<Comentarios> getAllComentarios() {
+        return this.comentarioRepositorio.findAll();
+    }
+
+    @DeleteMapping("/{id_comentario}")
+    @ResponseBody
+    public void borrar(@PathVariable Long id_comentario) {
+        this.comentarioRepositorio.deleteById(id_comentario);
     }
 }

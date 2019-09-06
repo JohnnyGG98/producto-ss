@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author alumno
  */
 @RestController
-@RequestMapping("/api/vi")
+@RequestMapping("/api/v1/Productos")
 public class ProductosControlador {
 
     @Autowired
