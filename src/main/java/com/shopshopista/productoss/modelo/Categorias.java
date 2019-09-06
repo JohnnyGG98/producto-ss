@@ -14,6 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
 /**
  *
  * @author 
@@ -81,6 +86,9 @@ public class Categorias implements Serializable {
     public String toString() {
         return "Categorias{" + "id_categoria=" + id_categoria + ", cat_nombre=" + cat_nombre + ", cat_codigo=" + cat_codigo + ", cat_activo=" + cat_activo + '}';
     }
+    
+
+
     
     
     
