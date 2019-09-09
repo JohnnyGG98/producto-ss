@@ -5,6 +5,7 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,12 +18,21 @@ public class Marcas {
  
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+     
+     @Column(name="id_marca")
     private Long id_marca;
     
+     @Column(name="marc_nombre")
      private String marc_nombre;
+     
+     @Column(name="marc_codigo")
      private String marc_codigo;
+     
+     @Column(name="marc_activo",columnDefinition = "BOOLEAN DEFAULT 'true'")
      private boolean marc_activo;
 
+     
+     
     public Long getId_marca() {
         return id_marca;
     }

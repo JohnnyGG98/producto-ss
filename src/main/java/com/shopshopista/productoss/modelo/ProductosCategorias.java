@@ -1,12 +1,19 @@
 package com.shopshopista.productoss.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,18 +27,27 @@ public class ProductosCategorias  implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
+    
+    @JsonBackReference
+    @JoinColumn(name="id_categoria", foreignKey = @ForeignKey(name="fk_producto_categoria", foreignKeyDefinition = "FOREIGN KEY (id_categoria) REFERENCES \"Categorias\" ON UPDATE CASCADE ON DELETE CASCADE"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Categorias id_categorias;
+    
     @Column(name="id_producto_categoria", nullable=false)
     private Long id_producto_categoria;
     
-    @Column(name="id_producto")
+    @Column(name="id_producto", table="Productos")
+    
     private Long id_producto;
     
-    @Column(name="id_categoria")
+    @Column(name="id_categoria", table="Categoria")
     private Long id_categoria;
     
     @Column(name="prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean prca_activo;
 
+    
+    
     public Long getId_producto_categoria() {
         return id_producto_categoria;
     }

@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
-
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Productos")
+@PrimaryKeyJoinColumn(name = "id_producto", foreignKey=@ForeignKey(name="fk_productos_stock"))
 public class Productos implements Serializable {
         
     private static final long serialVersionUID = 1L;
@@ -30,16 +27,15 @@ public class Productos implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     
-    @Column(name="id_producto")
+    @Column(name="id_producto",nullable=false)
     private Long id_producto;
     
-    @Column(name="id_vendedor")
+    @Column(name="id_vendedor",nullable=false)
     private Long id_vendedor;
     
-    @Column(name="id_marca")
-    private Long id_marcar;
-    
-    
+    @Column(name="id_marca", nullable=false)
+    private Long id_marca;
+   
     @Column(name="prod_nombre", length = 255, nullable = false )
     private String prod_nombre;
     
@@ -71,10 +67,10 @@ public class Productos implements Serializable {
     
     }
 
-    public Productos(Long id_producto, Long id_vendedor, Long id_marcar, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
+    public Productos(Long id_producto, Long id_vendedor, Long id_marca, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
         this.id_producto = id_producto;
         this.id_vendedor = id_vendedor;
-        this.id_marcar = id_marcar;
+        this.id_marca = id_marca;
         this.prod_nombre = prod_nombre;
         this.prod_fecha_Ingreso = prod_fecha_Ingreso;
         this.prod_stock_total = prod_stock_total;
@@ -102,12 +98,12 @@ public class Productos implements Serializable {
         this.id_vendedor = id_vendedor;
     }
 
-    public Long getId_marcar() {
-        return id_marcar;
+    public Long getId_marca() {
+        return id_marca;
     }
 
-    public void setId_marcar(Long id_marcar) {
-        this.id_marcar = id_marcar;
+    public void setId_marca(Long id_marca) {
+        this.id_marca = id_marca;
     }
 
     public String getProd_nombre() {
@@ -184,7 +180,7 @@ public class Productos implements Serializable {
 
     @Override
     public String toString() {
-        return "Productos{" + "id_producto=" + id_producto + ", id_vendedor=" + id_vendedor + ", id_marcar=" + id_marcar + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
+        return "Productos{" + "id_producto=" + id_producto + ", id_vendedor=" + id_vendedor + ", id_marca=" + id_marca + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
     }
 
   

@@ -5,6 +5,7 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,9 +18,14 @@ public class Imagenes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column(name="id_imagen", nullable=false)
     private Long id_imagen;
 
+    @Column(name="id_producto",nullable=false)
     private Productos id_producto;
+    
+    @Column(name="ima_activo",columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean ima_activo;
 
     public Long getId_imagen() {

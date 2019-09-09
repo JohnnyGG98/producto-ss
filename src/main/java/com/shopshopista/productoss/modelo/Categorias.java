@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 
 /**
@@ -25,14 +25,17 @@ import javax.persistence.Id;
  */
 @Entity
 @Table(name="Categorias")
+@PrimaryKeyJoinColumn(name= "id_categoria", foreignKey=@ForeignKey(name="fk_productos_categoria"))
 public class Categorias implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @ManyToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL)
     
     @Column(name="id_categoria", nullable=false)
     private Long id_categoria;
     
     @Column(name="cat_nombre", length=50, nullable=false)
+    @Id
     private String  cat_nombre;
     
     @Column(name="cat_codigo", length=50, nullable=false)

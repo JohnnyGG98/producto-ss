@@ -5,27 +5,51 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 
 /**
  *
  * @author Linis
  */
+@Entity
+@Table(name="ProductosStock")
 public class ProductosStock {
-    
-     @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(name = "id_producto_stock")
     private Long id_producto_stock;
-     
+
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "id_producto", table = "Productos")
     private Productos id_producto;
-    private int prst_cantidad ;
-    
-     @CreatedDate
-    private Date prst_fecha_ingreso;
+
+    @Column(name = "prst_cantidad")
+    private int prst_cantidad;
+
+    @Column(name = "prst_fecha_ingreso", columnDefinition = "timestamp DEFAULT now()")
+    private LocalDateTime prst_fecha_ingreso;
+
+    public ProductosStock() {
+    }
+
+    public ProductosStock(Long id_producto_stock, Productos id_producto, int prst_cantidad, LocalDateTime prst_fecha_ingreso) {
+        this.id_producto_stock = id_producto_stock;
+        this.id_producto = id_producto;
+        this.prst_cantidad = prst_cantidad;
+        this.prst_fecha_ingreso = prst_fecha_ingreso;
+    }
 
     public Long getId_producto_stock() {
         return id_producto_stock;
@@ -51,13 +75,17 @@ public class ProductosStock {
         this.prst_cantidad = prst_cantidad;
     }
 
-    public Date getPrst_fecha_ingreso() {
+    public LocalDateTime getPrst_fecha_ingreso() {
         return prst_fecha_ingreso;
     }
 
-    public void setPrst_fecha_ingreso(Date prst_fecha_ingreso) {
+    public void setPrst_fecha_ingreso(LocalDateTime prst_fecha_ingreso) {
         this.prst_fecha_ingreso = prst_fecha_ingreso;
     }
-     
-    
+
+    @Override
+    public String toString() {
+        return "ProductosStock{" + "id_producto_stock=" + id_producto_stock + ", id_producto=" + id_producto + ", prst_cantidad=" + prst_cantidad + ", prst_fecha_ingreso=" + prst_fecha_ingreso + '}';
+    }
+
 }
