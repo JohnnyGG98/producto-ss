@@ -1,8 +1,10 @@
 package com.shopshopista.productoss.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -21,68 +24,75 @@ import javax.persistence.Table;
  *
  * @author Linis
  */
-
 @Entity
-@Table(name="Productos")
-@PrimaryKeyJoinColumn(name = "id_producto", foreignKey=@ForeignKey(name="fk_productos_stock"))
+@Table(name = "Productos")
+@PrimaryKeyJoinColumn(name = "id_producto", foreignKey = @ForeignKey(name = "fk_productos_stock"))
 public class Productos implements Serializable {
-        
+
     private static final long serialVersionUID = 1L;
 
-    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    @Column(name="id_producto",nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(name = "id_producto", nullable = false)
     private Long id_producto;
-    
-    @Column(name="id_vendedor",nullable=false)
-    private Long id_vendedor;
-    
-    @Column(name="id_marca", nullable=false)
-    private Long id_marca;
-   
-    @Column(name="prod_nombre", length = 255, nullable = false )
+
+    @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
-    
-    @Column(name="prod_fecha_Ingreso",columnDefinition = "timestamp DEFAULT now()") 
+
+    @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
 
-    @Column(name="prod_stock_total", nullable=false )
+    @Column(name = "prod_stock_total", nullable = false)
     private int prod_stock_total;
-    
-    @Column(name="prod_marca", length=50)
+
+    @Column(name = "prod_marca", length = 50)
     private String prod_marca;
-    
-    @Column(name="prod_precio_venta",nullable=false)
+
+    @Column(name = "prod_precio_venta", nullable = false)
     private double prod_precio_venta;
-    
-    @Column(name="prod_descripcion",nullable=false)
+
+    @Column(name = "prod_descripcion", nullable = false)
     private String prod_descripcion;
-    
-    @Column(name="prod_restriccion_edad_max",nullable=false)
+
+    @Column(name = "prod_restriccion_edad_max", nullable = false)
     private int prod_restriccion_edad_max;
-    
-    @Column(name="prod_restriccion_edad_min",nullable=false)
+
+    @Column(name = "prod_restriccion_edad_min", nullable = false)
     private int prod_restriccion_edad_min;
-    
-    @Column(name="prod_activo", columnDefinition="BOOLEAN DEFAULT  'true' ")
+
+    @Column(name = "prod_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
     private boolean prod_activo;
-    
-       
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_marca")
     @JsonBackReference
-    private Marcas marca;
- 
-    public Productos(){
+    private Marcas id_marca;
+
+    //Falta el objeto de vendedor
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vend")
+    //private List<Vendedores> listVendedores;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_producto")
+    @JsonManagedReference
+    private List<Comentarios> listComentarios;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_producto")
+    private List<Imagenes> listImagenes;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_producto")
+    @JsonManagedReference
+    private List<ProductosCategorias> listProductosCategorias;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_producto")
+    @JsonManagedReference
+    private List<ProductosStock> listProductosStock;
     
+    public Productos() {
+
     }
 
-    public Productos(Long id_producto, Long id_vendedor, Long id_marca, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
+    public Productos(Long id_producto, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo, Marcas id_marca, List<Comentarios> listComentarios, List<Imagenes> listImagenes, List<ProductosCategorias> listProductosCategorias, List<ProductosStock> listProductosStock) {
         this.id_producto = id_producto;
-        this.id_vendedor = id_vendedor;
-        this.id_marca = id_marca;
         this.prod_nombre = prod_nombre;
         this.prod_fecha_Ingreso = prod_fecha_Ingreso;
         this.prod_stock_total = prod_stock_total;
@@ -92,6 +102,11 @@ public class Productos implements Serializable {
         this.prod_restriccion_edad_max = prod_restriccion_edad_max;
         this.prod_restriccion_edad_min = prod_restriccion_edad_min;
         this.prod_activo = prod_activo;
+        this.id_marca = id_marca;
+        this.listComentarios = listComentarios;
+        this.listImagenes = listImagenes;
+        this.listProductosCategorias = listProductosCategorias;
+        this.listProductosStock = listProductosStock;
     }
 
     public Long getId_producto() {
@@ -100,22 +115,6 @@ public class Productos implements Serializable {
 
     public void setId_producto(Long id_producto) {
         this.id_producto = id_producto;
-    }
-
-    public Long getId_vendedor() {
-        return id_vendedor;
-    }
-
-    public void setId_vendedor(Long id_vendedor) {
-        this.id_vendedor = id_vendedor;
-    }
-
-    public Long getId_marca() {
-        return id_marca;
-    }
-
-    public void setId_marca(Long id_marca) {
-        this.id_marca = id_marca;
     }
 
     public String getProd_nombre() {
@@ -190,11 +189,51 @@ public class Productos implements Serializable {
         this.prod_activo = prod_activo;
     }
 
-    @Override
-    public String toString() {
-        return "Productos{" + "id_producto=" + id_producto + ", id_vendedor=" + id_vendedor + ", id_marca=" + id_marca + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
+    public Marcas getId_marca() {
+        return id_marca;
     }
 
-  
+    public void setId_marca(Marcas id_marca) {
+        this.id_marca = id_marca;
+    }
+
+    public List<Comentarios> getListComentarios() {
+        return listComentarios;
+    }
+
+    public void setListComentarios(List<Comentarios> listComentarios) {
+        this.listComentarios = listComentarios;
+    }
+
+    public List<Imagenes> getListImagenes() {
+        return listImagenes;
+    }
+
+    public void setListImagenes(List<Imagenes> listImagenes) {
+        this.listImagenes = listImagenes;
+    }
+
+    public List<ProductosCategorias> getListProductosCategorias() {
+        return listProductosCategorias;
+    }
+
+    public void setListProductosCategorias(List<ProductosCategorias> listProductosCategorias) {
+        this.listProductosCategorias = listProductosCategorias;
+    }
+
+    public List<ProductosStock> getListProductosStock() {
+        return listProductosStock;
+    }
+
+    public void setListProductosStock(List<ProductosStock> listProductosStock) {
+        this.listProductosStock = listProductosStock;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Productos{" + "id_producto=" + id_producto + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + ", id_marca=" + id_marca + ", listComentarios=" + listComentarios + ", listImagenes=" + listImagenes + ", listProductosCategorias=" + listProductosCategorias + '}';
+    }
 
 }

@@ -27,30 +27,39 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Daniel
  */
 @RestController
-@RequestMapping("/api/v1/Categoria")
+@RequestMapping("/api/v1")
 public class CategoriaControlador {
 
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 
-    
-
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseBody
+    //traer todas las categorias
+    @GetMapping("/categorias")
     @CrossOrigin
-    public Categorias guardar(@RequestBody @Valid Categorias categoria) {
-        return this.categoriaRepositorio.save(categoria);
-    }
-    
-    @GetMapping("/producto")
-    @CrossOrigin
-    public List<Categorias> getAllProductoCategoria() {
+    public List<Categorias> getAllCategorias() {
         return this.categoriaRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_categoria}")
+    //crear una categoria
+    @RequestMapping(value = "/categoria", method = RequestMethod.POST)
     @ResponseBody
-    public void borrar(@PathVariable Long id_categoria) {
-        this.categoriaRepositorio.deleteById(id_categoria);
+    @CrossOrigin
+    public Categorias createCategoria(@RequestBody Categorias categoria) {
+        return this.categoriaRepositorio.save(categoria);
+    }
+
+    //eliminar categorias
+    @RequestMapping(value = "/eliminarcategoria/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    @CrossOrigin
+    public void eliminarCate(@PathVariable Long id) {
+        this.categoriaRepositorio.eliminarCategoria(id);
+    }
+
+    //buscar categoria por id
+    @GetMapping("/buscarcategoria/{id}")
+    @ResponseBody
+    public Categorias getBuscarById(@PathVariable Long id) {
+        return this.categoriaRepositorio.buscarCategoriaById(id);
     }
 }

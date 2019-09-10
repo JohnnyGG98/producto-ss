@@ -5,8 +5,6 @@
  */
 package com.shopshopista.productoss.controladores;
 
-import com.shopshopista.productoss.modelo.Categorias;
-import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.modelo.ProductosCategorias;
 import com.shopshopista.productoss.repositorio.ProductosCategoriasRepositorio;
 import java.util.List;

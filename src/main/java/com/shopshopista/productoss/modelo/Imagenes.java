@@ -5,11 +5,16 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,27 +31,25 @@ public class Imagenes {
     @Column(name = "id_imagen", nullable = false)
     private Long id_imagen;
 
-    @Column(name = "id_producto", nullable = false)
-    private Long id_producto;
-
-    @Column(name = "prod_descripcion", nullable = false)
-    private String prod_descripcion;
+    @Column(name = "ima_url", nullable = false)
+    private String ima_url;
 
     @Column(name = "ima_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
-     private boolean ima_activo;
-//    @Column(name="id_producto",nullable=false)
-//    private Productos id_producto;
+    private boolean ima_activo;
 
-   
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto")
+    private Productos id_producto;
 
     public Imagenes() {
     }
 
-    public Imagenes(Long id_imagen, Long id_producto, String prod_descripcion, boolean ima_activo) {
+    public Imagenes(Long id_imagen, String ima_url, boolean ima_activo, Productos id_producto) {
         this.id_imagen = id_imagen;
-        this.id_producto = id_producto;
-        this.prod_descripcion = prod_descripcion;
+        this.ima_url = ima_url;
         this.ima_activo = ima_activo;
+        this.id_producto = id_producto;
     }
 
     public Long getId_imagen() {
@@ -57,20 +60,12 @@ public class Imagenes {
         this.id_imagen = id_imagen;
     }
 
-    public Long getId_producto() {
-        return id_producto;
+    public String getIma_url() {
+        return ima_url;
     }
 
-    public void setId_producto(Long id_producto) {
-        this.id_producto = id_producto;
-    }
-
-    public String getProd_descripcion() {
-        return prod_descripcion;
-    }
-
-    public void setProd_descripcion(String prod_descripcion) {
-        this.prod_descripcion = prod_descripcion;
+    public void setIma_url(String ima_url) {
+        this.ima_url = ima_url;
     }
 
     public boolean isIma_activo() {
@@ -79,6 +74,14 @@ public class Imagenes {
 
     public void setIma_activo(boolean ima_activo) {
         this.ima_activo = ima_activo;
+    }
+
+    public Productos getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(Productos id_producto) {
+        this.id_producto = id_producto;
     }
 
 }

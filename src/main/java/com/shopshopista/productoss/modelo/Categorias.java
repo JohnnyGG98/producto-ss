@@ -6,45 +6,42 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-
 
 /**
  *
- * @author 
+ * @author
  */
 @Entity
-@Table(name="Categorias")
-@PrimaryKeyJoinColumn(name= "id_categoria", foreignKey=@ForeignKey(name="fk_productos_categoria"))
+@Table(name = "Categorias")
+//@PrimaryKeyJoinColumn(name= "id_categoria", foreignKey=@ForeignKey(name="fk_productos_categoria"))
 public class Categorias implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @ManyToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL)
-    
-    @Column(name="id_categoria", nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @ManyToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL)
+
+    @Column(name = "id_categoria", nullable = false)
     private Long id_categoria;
-    
-    @Column(name="cat_nombre", length=50, nullable=false)
+
+    @Column(name = "cat_nombre", length = 50, nullable = false)
     @Id
-    private String  cat_nombre;
-    
-    @Column(name="cat_codigo", length=50, nullable=false)
+    private String cat_nombre;
+
+    @Column(name = "cat_codigo", length = 50, nullable = false)
     private String cat_codigo;
-    
-    @Column(name="cat_activo", columnDefinition = "BOOLEAN DEFAULT 'true' ")
+
+    @Column(name = "cat_activo", columnDefinition = "BOOLEAN DEFAULT 'true' ")
     private boolean cat_activo;
-    
-    public Categorias(){}
+
+    public Categorias() {
+    }
 
     public Categorias(Long id_categoria, String cat_nombre, String cat_codigo, boolean cat_activo) {
         this.id_categoria = id_categoria;
@@ -89,10 +86,5 @@ public class Categorias implements Serializable {
     public String toString() {
         return "Categorias{" + "id_categoria=" + id_categoria + ", cat_nombre=" + cat_nombre + ", cat_codigo=" + cat_codigo + ", cat_activo=" + cat_activo + '}';
     }
-    
 
-
-    
-    
-    
 }

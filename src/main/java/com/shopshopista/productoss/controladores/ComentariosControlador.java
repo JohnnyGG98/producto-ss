@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/comentario")
 public class ComentariosControlador {
     
-     @Autowired
+    @Autowired
     private ComentariosRepositorio comentarioRepositorio;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -41,15 +41,15 @@ public class ComentariosControlador {
         return this.comentarioRepositorio.save(comentario);
     }
     
-     @GetMapping("/producto")
+     @GetMapping("/comentarios")
     @CrossOrigin
     public List<Comentarios> getAllComentarios() {
         return this.comentarioRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_comentario}")
+    @DeleteMapping("/eliminarcomentario/{id_comentario}")
     @ResponseBody
     public void borrar(@PathVariable Long id_comentario) {
-        this.comentarioRepositorio.deleteById(id_comentario);
+        this.comentarioRepositorio.eliminarComentarios(id_comentario);
     }
 }
