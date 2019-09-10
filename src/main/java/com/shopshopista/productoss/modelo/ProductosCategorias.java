@@ -1,6 +1,5 @@
 package com.shopshopista.productoss.modelo;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -20,34 +19,29 @@ import javax.persistence.Table;
  *
  * @author Linis
  */
-
 @Entity
-@Table(name="ProductosCategorias")
-public class ProductosCategorias  implements Serializable {
-    
+@Table(name = "ProductosCategorias")
+public class ProductosCategorias implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO) 
-    
-    @JsonBackReference
-    @JoinColumn(name="id_categoria", foreignKey = @ForeignKey(name="fk_producto_categoria", foreignKeyDefinition = "FOREIGN KEY (id_categoria) REFERENCES \"Categorias\" ON UPDATE CASCADE ON DELETE CASCADE"))
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     @ManyToOne(fetch = FetchType.LAZY)
-    private Categorias id_categorias;
-    
-    @Column(name="id_producto_categoria", nullable=false)
+
+    @Column(name = "id_producto_categoria", nullable = false)
     private Long id_producto_categoria;
-    
-    @Column(name="id_producto", table="Productos")
-    
+
+    @Column(name = "id_producto", table = "Productos")
+
     private Long id_producto;
-    
-    @Column(name="id_categoria", table="Categoria")
+
+    @Column(name = "id_categoria", table = "Categoria")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Long id_categoria;
-    
-    @Column(name="prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
+
+    @Column(name = "prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean prca_activo;
 
-    
-    
     public Long getId_producto_categoria() {
         return id_producto_categoria;
     }
@@ -82,14 +76,14 @@ public class ProductosCategorias  implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductosCategorias{" 
-                + "id_producto_categoria=" 
-                + id_producto_categoria + ", id_producto=" 
-                + id_producto 
-                + ", id_categoria=" 
-                + id_categoria 
-                + ", prca_activo=" 
+        return "ProductosCategorias{"
+                + "id_producto_categoria="
+                + id_producto_categoria + ", id_producto="
+                + id_producto
+                + ", id_categoria="
+                + id_categoria
+                + ", prca_activo="
                 + prca_activo + '}';
     }
-    
+
 }

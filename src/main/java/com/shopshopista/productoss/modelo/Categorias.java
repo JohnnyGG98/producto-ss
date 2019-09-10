@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 
@@ -25,13 +26,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 @Table(name="Categorias")
-@PrimaryKeyJoinColumn(name= "id_categoria", foreignKey=@ForeignKey(name="fk_productos_categoria"))
 public class Categorias implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @ManyToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL)
-    
+   
     @Column(name="id_categoria", nullable=false)
+    @OneToMany(mappedBy="id_categoria" ,cascade = CascadeType.ALL)
     private Long id_categoria;
     
     @Column(name="cat_nombre", length=50, nullable=false)

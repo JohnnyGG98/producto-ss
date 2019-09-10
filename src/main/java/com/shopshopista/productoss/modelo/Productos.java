@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Productos")
-@PrimaryKeyJoinColumn(name = "id_producto", foreignKey=@ForeignKey(name="fk_productos_stock"))
+
 public class Productos implements Serializable {
         
     private static final long serialVersionUID = 1L;
