@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
 
 import javax.persistence.Column;
@@ -69,4 +64,8 @@ public class Unidades {
         this.unid_codigo = unid_codigo;
     }
 
+    @Override
+    public String toString() {
+        return "Unidades{" + "id_unidad=" + id_unidad + ", unid_nombre=" + unid_nombre + ", unid_codigo=" + unid_codigo + '}';
+    }
 }

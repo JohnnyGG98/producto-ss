@@ -52,8 +52,8 @@ public class Marcas {
         this.marc_nombre = marc_nombre;
         this.marc_codigo = marc_codigo;
         this.marc_activo = marc_activo;
-    }
-
+    }     
+     
     public Long getId_marca() {
         return id_marca;
     }

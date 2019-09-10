@@ -33,7 +33,11 @@ public class Imagenes {
     private String prod_descripcion;
 
     @Column(name = "ima_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
-    private boolean ima_activo;
+     private boolean ima_activo;
+//    @Column(name="id_producto",nullable=false)
+//    private Productos id_producto;
+
+   
 
     public Imagenes() {
     }
