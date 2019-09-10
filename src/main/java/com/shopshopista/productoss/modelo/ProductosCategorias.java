@@ -26,13 +26,13 @@ public class ProductosCategorias implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
 
     @Column(name = "id_producto_categoria", nullable = false)
     private Long id_producto_categoria;
 
     @Column(name = "id_producto", table = "Productos")
-
+    @ManyToOne(fetch = FetchType.LAZY)
     private Long id_producto;
 
     @Column(name = "id_categoria", table = "Categoria")

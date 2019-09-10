@@ -31,8 +31,8 @@ public class Categorias implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
    
     @Column(name="id_categoria", nullable=false)
-    @OneToMany(mappedBy="id_categoria" ,cascade = CascadeType.ALL)
-    private Long id_categoria;
+        @OneToMany(mappedBy="id_categoria" ,cascade = CascadeType.ALL)
+        private Long id_categoria;
     
     @Column(name="cat_nombre", length=50, nullable=false)
     @Id
