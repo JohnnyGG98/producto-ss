@@ -10,16 +10,18 @@ import com.shopshopista.productoss.modelo.Unidades;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Linis
  */
+@Repository
 public interface UnidadesRepositorio extends JpaRepository<Unidades, Long> {
 
     @Query(value = "SELECT u FROM Unidades u WHERE u.id_unidad = :idUnidades ")
     Unidades buscarUnidadesById(@Param("idUnidades") Long idUnidades);
 
-    @Query(value = "UPDATE Unidades SET u.unid_activo = false WHERE u.id_unidad = :idUnidades ")
+    @Query(value = "UPDATE Unidades u SET u.unid_activo = false WHERE u.id_unidad = :idUnidades ")
     Unidades eliminarUnidades(@Param("idUnidades") Long idUnidades);
 }

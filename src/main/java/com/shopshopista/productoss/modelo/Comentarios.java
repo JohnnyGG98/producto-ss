@@ -34,6 +34,16 @@ public class Comentarios {
     @Column (name="com_activo", columnDefinition="BOOLEAN DEFAULT 'true'")
     private boolean com_activo;
 
+    public Comentarios() {
+    }
+
+    public Comentarios(Long id_comentario, Long id_producto, String comentario, boolean com_activo) {
+        this.id_comentario = id_comentario;
+        this.id_producto = id_producto;
+        this.comentario = comentario;
+        this.com_activo = com_activo;
+    }
+    
     public Long getId_comentario() {
         return id_comentario;
     }

@@ -51,6 +51,6 @@ public class CategoriaControlador {
     @DeleteMapping("/{id_categoria}")
     @ResponseBody
     public void borrar(@PathVariable Long id_categoria) {
-        this.categoriaRepositorio.deleteById(id_categoria);
+        this.categoriaRepositorio.eliminarCategoria(id_categoria);
     }
 }

@@ -26,7 +26,7 @@ import org.springframework.data.annotation.CreatedDate;
  * @author Linis
  */
 @Entity
-@Table(name="ProductosStock")
+@Table(name = "ProductosStock")
 public class ProductosStock {
 
     @Id
@@ -44,6 +44,9 @@ public class ProductosStock {
 
     @Column(name = "prst_fecha_ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prst_fecha_ingreso;
+
+    @Column(name = "prst_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
+    private boolean prst_activo;
 
     public ProductosStock() {
     }

@@ -10,17 +10,21 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Linis
  */
+@Entity
+@Table(name="Marcas")
 public class Marcas {
 
     @Id
@@ -42,6 +46,17 @@ public class Marcas {
     @Column(name = "marc_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean marc_activo;
 
+    public Marcas() {
+    }
+
+    public Marcas(Long id_marca, List<Productos> marcas, String marc_nombre, String marc_codigo, boolean marc_activo) {
+        this.id_marca = id_marca;
+        this.marcas = marcas;
+        this.marc_nombre = marc_nombre;
+        this.marc_codigo = marc_codigo;
+        this.marc_activo = marc_activo;
+    }
+    
     public Long getId_marca() {
         return id_marca;
     }

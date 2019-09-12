@@ -25,7 +25,6 @@ public class Unidades {
     @Column(name="id_unidad")
     private Long id_unidad;
     
-    
     @OneToMany(cascade = CascadeType.ALL)
     private List<Productos> unidades;
     
@@ -37,6 +36,7 @@ public class Unidades {
 
     @Column(name="unid_activo",columnDefinition = "BOOLEAN DEFAULT 'true'" )
     private boolean unid_activo;
+    
     public Unidades(){}
     
     public Unidades(Long id_unidad, String unid_nombre, String unid_codigo) {

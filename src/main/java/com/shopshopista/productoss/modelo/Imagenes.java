@@ -6,14 +6,18 @@
 package com.shopshopista.productoss.modelo;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Linis
  */
+@Entity
+@Table(name="Imagenes")
 public class Imagenes {
 
     @Id
@@ -28,6 +32,15 @@ public class Imagenes {
     @Column(name="ima_activo",columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean ima_activo;
 
+    public Imagenes() {
+    }
+
+    public Imagenes(Long id_imagen, Productos id_producto, boolean ima_activo) {
+        this.id_imagen = id_imagen;
+        this.id_producto = id_producto;
+        this.ima_activo = ima_activo;
+    }
+    
     public Long getId_imagen() {
         return id_imagen;
     }

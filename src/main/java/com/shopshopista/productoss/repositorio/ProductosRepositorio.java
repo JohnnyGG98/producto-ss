@@ -17,7 +17,7 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
     @Query(value = "SELECT p FROM Productos p WHERE p.id_producto = :idProducto ")
     Productos buscarProductosById(@Param("idProducto") Long idProducto);
 
-    @Query(value = "UPDATE Productos SET p.prod_activo = false WHERE p.id_producto = :idProducto ")
+    @Query(value = "UPDATE Productos p SET p.prod_activo = false WHERE p.id_producto = :idProducto ")
     Productos eliminarProductos(@Param("idProducto") Long idProducto);
 
 }
