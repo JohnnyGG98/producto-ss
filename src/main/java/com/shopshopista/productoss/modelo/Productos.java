@@ -1,7 +1,10 @@
 package com.shopshopista.productoss.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,8 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -17,56 +22,71 @@ import javax.persistence.Table;
  *
  * @author Linis
  */
-
 @Entity
-@Table(name="Productos")
+@Table(name = "Productos")
 
 public class Productos implements Serializable {
-        
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    @Column(name="id_producto",nullable=false)
-    @OneToMany(mappedBy="id_producto" ,cascade = CascadeType.ALL)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_producto", nullable = false)
     private Long id_producto;
-    
-    @Column(name="id_vendedor",nullable=false)
+
+    @JsonBackReference(value = "rf_producto")
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductosCategorias> categoriasProducto;
+
+    @Column(name = "id_vendedor", nullable = false)
     private Long id_vendedor;
-    
-    @Column(name="id_marca", nullable=false)
+
+    @Column(name = "id_marca", nullable = false)
     private Long id_marca;
-   
-    @Column(name="prod_nombre", length = 255, nullable = false )
+
+    @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
-    
-    @Column(name="prod_fecha_Ingreso",columnDefinition = "timestamp DEFAULT now()") 
+
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_unidad")
+    private Unidades id_unidad;
+
+    @JsonBackReference(value="rf_marcas")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_marcas")
+    private Marcas id_marcas;
+
+    @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
 
-    @Column(name="prod_stock_total", nullable=false )
+    @Column(name = "prod_stock_total", nullable = false)
     private int prod_stock_total;
-    
-    @Column(name="prod_marca", length=50)
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductosStock> stockProducto;
+
+    @Column(name = "prod_marca", length = 50)
     private String prod_marca;
-    
-    @Column(name="prod_precio_venta",nullable=false)
+
+    @Column(name = "prod_precio_venta", nullable = false)
     private double prod_precio_venta;
-    
-    @Column(name="prod_descripcion",nullable=false)
+
+    @Column(name = "prod_descripcion", nullable = false)
     private String prod_descripcion;
-    
-    @Column(name="prod_restriccion_edad_max",nullable=false)
+
+    @Column(name = "prod_restriccion_edad_max", nullable = false)
     private int prod_restriccion_edad_max;
-    
-    @Column(name="prod_restriccion_edad_min",nullable=false)
+
+    @Column(name = "prod_restriccion_edad_min", nullable = false)
     private int prod_restriccion_edad_min;
-    
-    @Column(name="prod_activo", columnDefinition="BOOLEAN DEFAULT  'true' ")
+
+    @Column(name = "prod_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
     private boolean prod_activo;
- 
-    public Productos(){
-    
+
+    public Productos() {
+
     }
 
     public Productos(Long id_producto, Long id_vendedor, Long id_marca, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
@@ -184,7 +204,5 @@ public class Productos implements Serializable {
     public String toString() {
         return "Productos{" + "id_producto=" + id_producto + ", id_vendedor=" + id_vendedor + ", id_marca=" + id_marca + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
     }
-
-  
 
 }

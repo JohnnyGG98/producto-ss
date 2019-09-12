@@ -1,10 +1,14 @@
 package com.shopshopista.productoss.modelo;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,12 +25,18 @@ public class Unidades {
     @Column(name="id_unidad")
     private Long id_unidad;
     
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Productos> unidades;
+    
     @Column(name="unid_nombre")
     private String unid_nombre;
     
-    @Column(name="unid_codigo",columnDefinition = "BOOLEAN DEFAULT 'true'")
+    @Column(name="unid_codigo")
     private String unid_codigo;
 
+    @Column(name="unid_activo",columnDefinition = "BOOLEAN DEFAULT 'true'" )
+    private boolean unid_activo;
     public Unidades(){}
     
     public Unidades(Long id_unidad, String unid_nombre, String unid_codigo) {

@@ -1,6 +1,7 @@
 package com.shopshopista.productoss.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,24 +21,23 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name = "ProductosCategorias")
+@Table(name = "\"ProductosCategorias\"")
 public class ProductosCategorias implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-
-
     @Column(name = "id_producto_categoria", nullable = false)
     private Long id_producto_categoria;
+    
+    @JoinColumn(name = "id_producto")
+    @JsonBackReference(value="rf_producto")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Productos id_producto;
 
-    @Column(name = "id_producto", table = "Productos")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Long id_producto;
-
-    @Column(name = "id_categoria", table = "Categoria")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Long id_categoria;
+    @JoinColumn(name = "id_categoria")
+    @JsonBackReference(value="rf_categoria")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Categorias id_categoria;
 
     @Column(name = "prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean prca_activo;
@@ -50,19 +50,19 @@ public class ProductosCategorias implements Serializable {
         this.id_producto_categoria = id_producto_categoria;
     }
 
-    public Long getId_producto() {
+    public Productos getId_producto() {
         return id_producto;
     }
 
-    public void setId_producto(Long id_producto) {
+    public void setId_producto(Productos id_producto) {
         this.id_producto = id_producto;
     }
 
-    public Long getId_categoria() {
+    public Categorias getId_categoria() {
         return id_categoria;
     }
 
-    public void setId_categoria(Long id_categoria) {
+    public void setId_categoria(Categorias id_categoria) {
         this.id_categoria = id_categoria;
     }
 
