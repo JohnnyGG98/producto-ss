@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.shopshopista.productoss.repositorio;
+
+import com.shopshopista.productoss.modelo.Imagenes;
+import com.shopshopista.productoss.modelo.Marcas;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+/**
+ *
+ * @author Linis
+ */
+public interface ImagenesRepositorio extends JpaRepository<Imagenes, Long> {
+
+    @Query(value = "SELECT i FROM Imagenes i WHERE i.id_imagen = :idImagen ")
+    Imagenes buscarImagenesById(@Param("idImagen") Long idImagen);
+
+    @Query(value = "UPDATE Imagenes SET i.ima_activo = false WHERE i.id_imagen = :idImagen ")
+    Imagenes eliminarImagenes(@Param("idImagen") Long idImagen);
+
+}
