@@ -10,17 +10,21 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Linis
  */
+@Entity
+@Table(name="Marcas")
 public class Marcas {
 
     @Id
@@ -29,7 +33,7 @@ public class Marcas {
     @Column(name = "id_marca")
     private Long id_marca;
 
-    @JsonManagedReference(value="rf_marcas")
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Productos> marcas;
 
