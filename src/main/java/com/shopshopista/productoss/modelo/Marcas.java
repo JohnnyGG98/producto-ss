@@ -46,6 +46,17 @@ public class Marcas {
     @Column(name = "marc_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean marc_activo;
 
+    public Marcas() {
+    }
+
+    public Marcas(Long id_marca, List<Productos> marcas, String marc_nombre, String marc_codigo, boolean marc_activo) {
+        this.id_marca = id_marca;
+        this.marcas = marcas;
+        this.marc_nombre = marc_nombre;
+        this.marc_codigo = marc_codigo;
+        this.marc_activo = marc_activo;
+    }
+    
     public Long getId_marca() {
         return id_marca;
     }

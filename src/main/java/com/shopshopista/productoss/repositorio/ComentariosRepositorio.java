@@ -21,7 +21,7 @@ public interface ComentariosRepositorio extends JpaRepository<Comentarios, Long>
     @Query(value = "SELECT c FROM Comentarios c WHERE c.id_comentario = :idComentario ")
     Comentarios buscarComentarioById(@Param("idComentario") Long idComentario);
 
-    @Query(value = "UPDATE Comentarios SET c.com_activo = false WHERE c.id_comentario = :idComentario ")
+    @Query(value = "UPDATE Comentarios c SET c.com_activo = false WHERE c.id_comentario = :idComentario ")
     Comentarios eliminarComentarios(@Param("idComentario") Long idComentario);
 
 }

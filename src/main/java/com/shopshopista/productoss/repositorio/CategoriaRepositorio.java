@@ -21,7 +21,7 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
     @Query(value = "SELECT c FROM Categorias c WHERE c.id_categoria = :idCategoria ")
     Categorias buscarCategoriaById(@Param("idCategoria") Long idCategoria);
 
-    @Query(value = "UPDATE Categorias SET c.cat_activo = false WHERE c.id_categoria = :idCategoria ")
+    @Query(value = "UPDATE Categorias c SET c.cat_activo = false WHERE c.id_categoria = :idCategoria ")
     Categorias eliminarCategoria(@Param("idCategoria") Long idCategoria);
 
 }

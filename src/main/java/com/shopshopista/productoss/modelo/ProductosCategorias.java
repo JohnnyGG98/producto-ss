@@ -42,6 +42,17 @@ public class ProductosCategorias implements Serializable {
     @Column(name = "prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean prca_activo;
 
+    public ProductosCategorias() {
+    }
+
+    public ProductosCategorias(Long id_producto_categoria, Productos id_producto, Categorias id_categoria, boolean prca_activo) {
+        this.id_producto_categoria = id_producto_categoria;
+        this.id_producto = id_producto;
+        this.id_categoria = id_categoria;
+        this.prca_activo = prca_activo;
+    }
+    
+
     public Long getId_producto_categoria() {
         return id_producto_categoria;
     }

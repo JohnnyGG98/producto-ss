@@ -22,7 +22,7 @@ public interface ProductosCategoriasRepositorio extends JpaRepository<ProductosC
     @Query(value = "SELECT pc FROM ProductosCategorias pc WHERE pc.id_producto_categoria = :idProductosCategoria ")
     ProductosCategorias buscarProductosCategoriaById(@Param("idProductosCategoria") Long idProductosCategoria);
 
-    @Query(value = "UPDATE ProductosCategorias SET pc.prca_activo = false WHERE pc.id_producto_categoria = :idProductosCategoria ")
+    @Query(value = "UPDATE ProductosCategorias pc SET pc.prca_activo = false WHERE pc.id_producto_categoria = :idProductosCategoria ")
     ProductosCategorias eliminarProductosCategoria(@Param("idProductosCategoria") Long idProductosCategoria);
 
 }
