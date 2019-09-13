@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,12 +38,7 @@ public class Productos implements Serializable {
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductosCategorias> categoriasProducto;
 
-    @Column(name = "id_vendedor", nullable = false)
-    private Long id_vendedor;
-
-    @Column(name = "id_marca", nullable = false)
-    private Long id_marca;
-
+    
     @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
 
@@ -51,10 +47,10 @@ public class Productos implements Serializable {
     @JoinColumn(name = "id_unidad")
     private Unidades id_unidad;
 
-    @JsonBackReference(value="rf_marcas")
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_marcas")
-    private Marcas id_marcas;
+    @JsonBackReference(value="rf_marca")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_marca")
+    private Marcas id_marca;
 
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
@@ -88,10 +84,9 @@ public class Productos implements Serializable {
 
     }
 
-    public Productos(Long id_producto, Long id_vendedor, Long id_marca, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
+    public Productos(Long id_producto, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
         this.id_producto = id_producto;
-        this.id_vendedor = id_vendedor;
-        this.id_marca = id_marca;
+
         this.prod_nombre = prod_nombre;
         this.prod_fecha_Ingreso = prod_fecha_Ingreso;
         this.prod_stock_total = prod_stock_total;
@@ -109,22 +104,6 @@ public class Productos implements Serializable {
 
     public void setId_producto(Long id_producto) {
         this.id_producto = id_producto;
-    }
-
-    public Long getId_vendedor() {
-        return id_vendedor;
-    }
-
-    public void setId_vendedor(Long id_vendedor) {
-        this.id_vendedor = id_vendedor;
-    }
-
-    public Long getId_marca() {
-        return id_marca;
-    }
-
-    public void setId_marca(Long id_marca) {
-        this.id_marca = id_marca;
     }
 
     public String getProd_nombre() {
@@ -201,7 +180,7 @@ public class Productos implements Serializable {
 
     @Override
     public String toString() {
-        return "Productos{" + "id_producto=" + id_producto + ", id_vendedor=" + id_vendedor + ", id_marca=" + id_marca + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
+        return "Productos{" + "id_producto=" + id_producto + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
     }
 
 }

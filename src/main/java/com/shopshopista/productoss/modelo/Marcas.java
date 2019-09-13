@@ -33,7 +33,7 @@ public class Marcas {
     @Column(name = "id_marca")
     private Long id_marca;
 
-    @JsonManagedReference(value="rf_marcas")
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Productos> marcas;
 
