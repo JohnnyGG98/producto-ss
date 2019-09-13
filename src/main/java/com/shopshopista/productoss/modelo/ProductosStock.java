@@ -51,11 +51,12 @@ public class ProductosStock {
     public ProductosStock() {
     }
 
-    public ProductosStock(Long id_producto_stock, Productos id_producto, int prst_cantidad, LocalDateTime prst_fecha_ingreso) {
+    public ProductosStock(Long id_producto_stock, Productos id_producto, int prst_cantidad, LocalDateTime prst_fecha_ingreso, boolean prst_activo) {
         this.id_producto_stock = id_producto_stock;
         this.id_producto = id_producto;
         this.prst_cantidad = prst_cantidad;
         this.prst_fecha_ingreso = prst_fecha_ingreso;
+        this.prst_activo = prst_activo;
     }
 
     public Long getId_producto_stock() {
@@ -88,6 +89,14 @@ public class ProductosStock {
 
     public void setPrst_fecha_ingreso(LocalDateTime prst_fecha_ingreso) {
         this.prst_fecha_ingreso = prst_fecha_ingreso;
+    }
+
+    public boolean isPrst_activo() {
+        return prst_activo;
+    }
+
+    public void setPrst_activo(boolean prst_activo) {
+        this.prst_activo = prst_activo;
     }
 
     @Override

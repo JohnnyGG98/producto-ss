@@ -38,11 +38,29 @@ public class Unidades {
     private boolean unid_activo;
     
     public Unidades(){}
-    
-    public Unidades(Long id_unidad, String unid_nombre, String unid_codigo) {
+
+    public Unidades(Long id_unidad, List<Productos> unidades, String unid_nombre, String unid_codigo, boolean unid_activo) {
         this.id_unidad = id_unidad;
+        this.unidades = unidades;
         this.unid_nombre = unid_nombre;
         this.unid_codigo = unid_codigo;
+        this.unid_activo = unid_activo;
+    }
+
+    public List<Productos> getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(List<Productos> unidades) {
+        this.unidades = unidades;
+    }
+
+    public boolean isUnid_activo() {
+        return unid_activo;
+    }
+
+    public void setUnid_activo(boolean unid_activo) {
+        this.unid_activo = unid_activo;
     }
 
     public Long getId_unidad() {
