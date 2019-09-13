@@ -21,7 +21,7 @@ public interface MarcaRepositorio extends JpaRepository<Marcas, Long> {
     @Query(value = "SELECT m FROM Marcas m WHERE m.id_marca = :idMarca")
     Marcas buscarMarcasById(@Param("idMarca") Long idMarca);
 
-    @Query(value = "UPDATE Marcas m SET m.com_activo = false WHERE m.id_marca = :idMarca")
+    @Query(value = "UPDATE Marcas m SET m.marc_activo = false WHERE m.id_marca = :idMarca")
     Marcas eliminarMarcas(@Param("idMarca") Long idMarca);
 
 }
