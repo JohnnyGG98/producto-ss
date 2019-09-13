@@ -5,10 +5,10 @@
  */
 package com.shopshopista.productoss.controladores;
 
-import com.shopshopista.productoss.modelo.Imagenes;
 import com.shopshopista.productoss.modelo.Productos;
-import com.shopshopista.productoss.repositorio.ImagenesRepositorio;
+import com.shopshopista.productoss.modelo.ProductosStock;
 import com.shopshopista.productoss.repositorio.ProductosRepositorio;
+import com.shopshopista.productoss.repositorio.ProductosStockRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,30 +27,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/Imagenes")
-public class ImagenesControlador {
-    
+@RequestMapping("/api/v1/ProductosStock")
+public class ProductosStockControlador {
     
     @Autowired
-    private ImagenesRepositorio imagenesRepositorio;
+    private ProductosStockRepositorio productosStockRepositorio;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Imagenes guardar(@RequestBody @Valid Imagenes imagenes) {
-        return this.imagenesRepositorio.save(imagenes);
+    public ProductosStock guardar(@RequestBody @Valid ProductosStock productosStock) {
+        return this.productosStockRepositorio.save(productosStock);
     }
       @GetMapping("/producto")
     @CrossOrigin
-    public List<Imagenes> getAllImagenes() {
-        return this.imagenesRepositorio.findAll();
+    public List<ProductosStock> getAllProductos() {
+        return this.productosStockRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_imagen}")
+    @DeleteMapping("/{id_producto_stock}")
     @ResponseBody
-    public void borrar(@PathVariable Long id_imagen) {
-        this.imagenesRepositorio.eliminarImagenes(id_imagen);
+    public void borrar(@PathVariable Long id_producto_stock) {
+        this.productosStockRepositorio.eliminarProductosStock(id_producto_stock);
     }
-    
     
 }

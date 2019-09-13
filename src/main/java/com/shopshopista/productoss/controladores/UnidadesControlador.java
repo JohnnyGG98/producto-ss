@@ -5,10 +5,10 @@
  */
 package com.shopshopista.productoss.controladores;
 
-import com.shopshopista.productoss.modelo.Imagenes;
 import com.shopshopista.productoss.modelo.Productos;
-import com.shopshopista.productoss.repositorio.ImagenesRepositorio;
+import com.shopshopista.productoss.modelo.Unidades;
 import com.shopshopista.productoss.repositorio.ProductosRepositorio;
+import com.shopshopista.productoss.repositorio.UnidadesRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,30 +27,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/Imagenes")
-public class ImagenesControlador {
+@RequestMapping("/api/v1/Unidades")
+public class UnidadesControlador {
     
     
     @Autowired
-    private ImagenesRepositorio imagenesRepositorio;
+    private UnidadesRepositorio unidadesRepositorio;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Imagenes guardar(@RequestBody @Valid Imagenes imagenes) {
-        return this.imagenesRepositorio.save(imagenes);
+    public Unidades guardar(@RequestBody @Valid Unidades unidades) {
+        return this.unidadesRepositorio.save(unidades);
     }
       @GetMapping("/producto")
     @CrossOrigin
-    public List<Imagenes> getAllImagenes() {
-        return this.imagenesRepositorio.findAll();
+    public List<Unidades> getAllProductos() {
+        return this.unidadesRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_imagen}")
+    @DeleteMapping("/{id_unidad}")
     @ResponseBody
-    public void borrar(@PathVariable Long id_imagen) {
-        this.imagenesRepositorio.eliminarImagenes(id_imagen);
+    public void borrar(@PathVariable Long id_unidad) {
+        this.unidadesRepositorio.eliminarUnidades(id_unidad);
     }
-    
-    
 }

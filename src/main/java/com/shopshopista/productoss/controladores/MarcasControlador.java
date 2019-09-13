@@ -5,9 +5,9 @@
  */
 package com.shopshopista.productoss.controladores;
 
-import com.shopshopista.productoss.modelo.Imagenes;
+import com.shopshopista.productoss.modelo.Marcas;
 import com.shopshopista.productoss.modelo.Productos;
-import com.shopshopista.productoss.repositorio.ImagenesRepositorio;
+import com.shopshopista.productoss.repositorio.MarcaRepositorio;
 import com.shopshopista.productoss.repositorio.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
@@ -27,30 +27,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/Imagenes")
-public class ImagenesControlador {
+@RequestMapping("/api/v1/Marcas")
+public class MarcasControlador {
     
-    
-    @Autowired
-    private ImagenesRepositorio imagenesRepositorio;
+       @Autowired
+    private MarcaRepositorio marcaRepositorio;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Imagenes guardar(@RequestBody @Valid Imagenes imagenes) {
-        return this.imagenesRepositorio.save(imagenes);
+    public Marcas guardar(@RequestBody @Valid Marcas marcas) {
+        return this.marcaRepositorio.save(marcas);
     }
       @GetMapping("/producto")
     @CrossOrigin
-    public List<Imagenes> getAllImagenes() {
-        return this.imagenesRepositorio.findAll();
+    public List<Marcas> getAllMarcas() {
+        return this.marcaRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_imagen}")
+    @DeleteMapping("/{id_marca}")
     @ResponseBody
-    public void borrar(@PathVariable Long id_imagen) {
-        this.imagenesRepositorio.eliminarImagenes(id_imagen);
+    public void borrar(@PathVariable Long id_marca) {
+        this.marcaRepositorio.eliminarMarcas(id_marca);
     }
-    
     
 }
