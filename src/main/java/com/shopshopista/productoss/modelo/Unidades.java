@@ -21,7 +21,6 @@ public class Unidades {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
     @Column(name="id_unidad")
     private Long id_unidad;
     

@@ -34,7 +34,7 @@ public class ProductosStock {
     @Column(name = "id_producto_stock")
     private Long id_producto_stock;
 
-    @JsonBackReference
+    @JsonBackReference(value = "rf_productosstock")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")
     private Productos id_producto;

@@ -33,16 +33,22 @@ public class Productos implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_producto", nullable = false)
     private Long id_producto;
+    
+    @Column(name = "id_vendedor ", nullable = false)
+    private Long id_vendedor;
 
-    @JsonBackReference(value = "rf_producto")
+    @JsonManagedReference(value = "rf_productocategoria")
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductosCategorias> categoriasProducto;
-
     
+     @JsonManagedReference(value = "rf_imagenes")
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Imagenes> imagenes;
+
     @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
 
-    @JsonBackReference
+    @JsonBackReference(value="rf_unidad")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_unidad")
     private Unidades id_unidad;
@@ -52,13 +58,18 @@ public class Productos implements Serializable {
     @JoinColumn(name = "id_marca")
     private Marcas id_marca;
 
+    @JsonBackReference(value="rf_linea")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_linea")
+    private Lineas id_linea;
+    
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
 
     @Column(name = "prod_stock_total", nullable = false)
     private int prod_stock_total;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "rf_productosstock")
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductosStock> stockProducto;
 
@@ -84,18 +95,32 @@ public class Productos implements Serializable {
 
     }
 
-    public Productos(Long id_producto, String prod_nombre, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
+    public Productos(Long id_producto, Long id_vendedor, List<ProductosCategorias> categoriasProducto, List<Imagenes> imagenes, String prod_nombre, Unidades id_unidad, Marcas id_marca, Lineas id_linea, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, List<ProductosStock> stockProducto, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
         this.id_producto = id_producto;
-
+        this.id_vendedor = id_vendedor;
+        this.categoriasProducto = categoriasProducto;
+        this.imagenes = imagenes;
         this.prod_nombre = prod_nombre;
+        this.id_unidad = id_unidad;
+        this.id_marca = id_marca;
+        this.id_linea = id_linea;
         this.prod_fecha_Ingreso = prod_fecha_Ingreso;
         this.prod_stock_total = prod_stock_total;
+        this.stockProducto = stockProducto;
         this.prod_marca = prod_marca;
         this.prod_precio_venta = prod_precio_venta;
         this.prod_descripcion = prod_descripcion;
         this.prod_restriccion_edad_max = prod_restriccion_edad_max;
         this.prod_restriccion_edad_min = prod_restriccion_edad_min;
         this.prod_activo = prod_activo;
+    }
+
+    public List<Imagenes> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagenes> imagenes) {
+        this.imagenes = imagenes;
     }
 
     public Long getId_producto() {
@@ -178,6 +203,56 @@ public class Productos implements Serializable {
         this.prod_activo = prod_activo;
     }
 
+    public Long getId_vendedor() {
+        return id_vendedor;
+    }
+
+    public void setId_vendedor(Long id_vendedor) {
+        this.id_vendedor = id_vendedor;
+    }
+
+    public List<ProductosCategorias> getCategoriasProducto() {
+        return categoriasProducto;
+    }
+
+    public void setCategoriasProducto(List<ProductosCategorias> categoriasProducto) {
+        this.categoriasProducto = categoriasProducto;
+    }
+
+    public Unidades getId_unidad() {
+        return id_unidad;
+    }
+
+    public void setId_unidad(Unidades id_unidad) {
+        this.id_unidad = id_unidad;
+    }
+
+    public Marcas getId_marca() {
+        return id_marca;
+    }
+
+    public void setId_marca(Marcas id_marca) {
+        this.id_marca = id_marca;
+    }
+
+    public Lineas getId_linea() {
+        return id_linea;
+    }
+
+    public void setId_linea(Lineas id_linea) {
+        this.id_linea = id_linea;
+    }
+
+    public List<ProductosStock> getStockProducto() {
+        return stockProducto;
+    }
+
+    public void setStockProducto(List<ProductosStock> stockProducto) {
+        this.stockProducto = stockProducto;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Productos{" + "id_producto=" + id_producto + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_marca=" + prod_marca + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';

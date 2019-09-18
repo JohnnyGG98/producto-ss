@@ -29,11 +29,10 @@ public class Marcas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id_marca")
     private Long id_marca;
 
-    @JsonManagedReference
+    @JsonManagedReference(value="rf_marca")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Productos> marcas;
 
@@ -87,6 +86,14 @@ public class Marcas {
 
     public void setMarc_activo(boolean marc_activo) {
         this.marc_activo = marc_activo;
+    }
+
+    public List<Productos> getMarcas() {
+        return marcas;
+    }
+
+    public void setMarcas(List<Productos> marcas) {
+        this.marcas = marcas;
     }
 
 }

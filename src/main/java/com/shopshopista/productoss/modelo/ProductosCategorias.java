@@ -30,7 +30,7 @@ public class ProductosCategorias implements Serializable {
     private Long id_producto_categoria;
     
     @JoinColumn(name = "id_producto")
-    @JsonBackReference(value="rf_producto")
+    @JsonBackReference(value="rf_productocategoria")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Productos id_producto;
 

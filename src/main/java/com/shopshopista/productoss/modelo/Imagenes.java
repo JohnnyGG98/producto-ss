@@ -5,11 +5,16 @@
  */
 package com.shopshopista.productoss.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,8 +31,11 @@ public class Imagenes {
     @Column(name="id_imagen", nullable=false)
     private Long id_imagen;
 
-    @Column(name="id_producto",nullable=false)
+    @JsonBackReference(value="rf_imagenes")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto")
     private Productos id_producto;
+    
     
     @Column(name="ima_activo",columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean ima_activo;
@@ -40,7 +48,7 @@ public class Imagenes {
         this.id_producto = id_producto;
         this.ima_activo = ima_activo;
     }
-    
+
     public Long getId_imagen() {
         return id_imagen;
     }

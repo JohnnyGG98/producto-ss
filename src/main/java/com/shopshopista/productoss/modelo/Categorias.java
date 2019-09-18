@@ -1,6 +1,5 @@
 package com.shopshopista.productoss.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
@@ -8,19 +7,12 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
@@ -35,7 +27,7 @@ public class Categorias implements Serializable {
     @Column(name = "id_categoria", nullable = false)
     private Long id_categoria;
     
-    @JsonBackReference(value = "rf_categoria")
+    @JsonManagedReference(value = "rf_categoria")
     @OneToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ProductosCategorias> productosCategoria;
     
@@ -51,11 +43,16 @@ public class Categorias implements Serializable {
     public Categorias() {
     }
 
-    public Categorias(Long id_categoria, String cat_nombre, String cat_codigo, boolean cat_activo) {
+    public Categorias(Long id_categoria, List<ProductosCategorias> productosCategoria, String cat_nombre, String cat_codigo, boolean cat_activo) {
         this.id_categoria = id_categoria;
+        this.productosCategoria = productosCategoria;
         this.cat_nombre = cat_nombre;
         this.cat_codigo = cat_codigo;
         this.cat_activo = cat_activo;
+    }
+
+    public void setProductosCategoria(List<ProductosCategorias> productosCategoria) {
+        this.productosCategoria = productosCategoria;
     }
 
     public Long getId_categoria() {
