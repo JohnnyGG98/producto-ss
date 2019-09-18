@@ -6,9 +6,7 @@
 package com.shopshopista.productoss.controladores;
 
 import com.shopshopista.productoss.modelo.Categorias;
-import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.repositorio.CategoriaRepositorio;
-import com.shopshopista.productoss.repositorio.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
