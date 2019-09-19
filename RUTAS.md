@@ -15,7 +15,7 @@
 
 -----------------------------------
 
-#### api/v1/cardex/crear
+#### api/v1/cardex/guardar
 - Metodo: **CREATE**
 - Parametro: **Cardex cardex**
 
