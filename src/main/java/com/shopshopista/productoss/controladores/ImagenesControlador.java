@@ -40,7 +40,7 @@ public class ImagenesControlador {
         return this.imagenesRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_imagen}")
+    @DeleteMapping("/eliminar/{id_imagen}")
     @ResponseBody
     public void borrar(@PathVariable Long id_imagen) {
         this.imagenesRepositorio.eliminarImagenes(id_imagen);

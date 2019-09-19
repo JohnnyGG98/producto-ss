@@ -40,7 +40,7 @@ public class ComentariosControlador {
         return this.comentarioRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_comentario}")
+    @DeleteMapping("/eliminar/{id_comentario}")
     @ResponseBody
     public void borrar(@PathVariable Long id_comentario) {
         this.comentarioRepositorio.deleteById(id_comentario);

@@ -38,7 +38,7 @@ public class MarcasControlador {
         return this.marcaRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_marca}")
+    @DeleteMapping("/eliminar/{id_marca}")
     @ResponseBody
     public void borrar(@PathVariable Long id_marca) {
         this.marcaRepositorio.eliminarMarcas(id_marca);

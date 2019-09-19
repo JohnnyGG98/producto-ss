@@ -41,7 +41,7 @@ public class ProductosCategoriaControlador {
         return this.productoCategoriaRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_prod_categoria}")
+    @DeleteMapping("/eliminar/{id_prod_categoria}")
     @ResponseBody
     public void borrar(@PathVariable Long id_producto_categoria) {
         this.productoCategoriaRepositorio.deleteById(id_producto_categoria);

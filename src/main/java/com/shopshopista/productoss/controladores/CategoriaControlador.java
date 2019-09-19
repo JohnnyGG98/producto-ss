@@ -45,7 +45,7 @@ public class CategoriaControlador {
         return this.categoriaRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_categoria}")
+    @DeleteMapping("/eliminar/{id_categoria}")
     @ResponseBody
     public void borrar(@PathVariable Long id_categoria) {
         this.categoriaRepositorio.eliminarCategoria(id_categoria);
