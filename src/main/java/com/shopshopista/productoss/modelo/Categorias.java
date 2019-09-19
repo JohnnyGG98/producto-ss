@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Table(
-        name = "\"Categorias\""
+        name = "\"Categorias\"",
         schema = "producto"
 )
 public class Categorias implements Serializable {
