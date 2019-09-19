@@ -4,6 +4,7 @@
 - Metodo: **POST**
 - Parametros: **Persona**
 
+--------------------------
 #### api/v1/productos/guardar
 - Metodo: **POST**
 - Parametros:**String productos**
@@ -11,6 +12,8 @@
 #### api/v1/productos/elminiar
 - Metodo: **DELETE**
 - Parametros:**Long id_productos**
+
+-----------------------------------
 
 #### api/v1/cardex/crear
 - Metodo: **CREATE**
@@ -24,6 +27,7 @@
 - Metodo: **GET**
 - Parametros:**Long id_cardex**
 
+-----------------------------------
 
 #### api/v1/categoria/guardar
 - Metodo: **POST**
@@ -32,6 +36,8 @@
 #### api/v1/categoria/elminiar
 - Metodo: **DELETE**
 - Parametros:**Long id_categoria**
+
+---------------------------------------
 
 #### api/v1/comentarios/guardar
 - Metodos: **POST**
@@ -42,6 +48,8 @@
 - Metodos: **DELETE**
 - Parametros: **Long id_comentario**
 
+-------------------------------------------
+
 #### api/v1/imagenes/guardar
 - Metodos: **POST**
 - Parametros: **Imagenes imagenes**
@@ -49,6 +57,8 @@
 #### api/v1/imagenes/eliminar
 - Metodos: **DELETE**
 - Parametros: **Imagenes imagenes**
+
+----------------------------------------------
 
 #### api/v1/Lineas/crear
 - Metodos: **CREATE**
@@ -62,6 +72,8 @@
 - Metodos: **GET**
 - Parametro: **Long id_linea**
 
+--------------------------------------------------
+
 #### api/v1/marcas/guardar
 - Metodos: **POST**
 - Parametro: **Marcas marca**
@@ -70,22 +82,46 @@
 - Metodos: **DELETE**
 - Parametro: **Long id_marca**
 
-#### api/v1/productosCategorias/guardar
+------------------------------------------------------
+
+#### api/v1/productos/categorias/guardar
 - Metodos: **POST**
 - Parametro: **productosCategorias productoCategoria**
 
-#### api/v1/productosCategorias/eliminar
+#### api/v1/productos/categorias/eliminar
 - Metodos: **DELETE**
 - Parametro: **Long id_productos_categoria**
 
-#### api/v1/productosStock/guardar
+--------------------------------------------------------
+
+#### api/v1/productos/stock/guardar
 - Metodos: **POST**
 - Parametro: **productosStock productosStock**
 
-#### api/v1/productosStock/eliminar
+#### api/v1/productos/stock/eliminar
 - Metodos: **DELETE**
 - Parametro: **Long id_producto_stock**
 
-#### api/v1/TipoTransaccion/guardar
+----------------------------------------------------------
 
-#### api/v1/tipo/transaccion/guardar
+#### api/v1/tipo/transaccion/crear
+- Metodos: **CREATE**
+- Parametro: **tipoTransaccion tipoTransaccion**
+
+#### api/v1/tipo/transaccion/eliminar
+- Metodos: **DELETE**
+- Parametro: **Long idTipoTransaccion**
+
+#### api/v1/tipo/transaccion/get
+- Metodos: **GET**
+- Parametro: **Long idTipoTransaccion**
+
+----------------------------------------------------------
+
+#### api/v1/unidades/guardar
+- Metodos: **POST**
+- Parametro: **Unidades unidade**
+
+#### api/v1/unidades/eliminar
+- Metodos: **DELETE**
+- Parametro: **Long id_unidad**
