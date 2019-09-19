@@ -70,22 +70,38 @@
 - Metodos: **DELETE**
 - Parametro: **Long id_marca**
 
-#### api/v1/productosCategorias/guardar
+#### api/v1/productos/categorias/guardar
 - Metodos: **POST**
 - Parametro: **productosCategorias productoCategoria**
 
-#### api/v1/productosCategorias/eliminar
+#### api/v1/productos/categorias/eliminar
 - Metodos: **DELETE**
 - Parametro: **Long id_productos_categoria**
 
-#### api/v1/productosStock/guardar
+#### api/v1/productos/stock/guardar
 - Metodos: **POST**
 - Parametro: **productosStock productosStock**
 
-#### api/v1/productosStock/eliminar
+#### api/v1/productos/stock/eliminar
 - Metodos: **DELETE**
 - Parametro: **Long id_producto_stock**
 
-#### api/v1/TipoTransaccion/guardar
+#### api/v1/tipo/transaccion/crear
+- Metodos: **CREATE**
+- Parametro: **tipoTransaccion tipoTransaccion**
 
-#### api/v1/tipo/transaccion/guardar
+#### api/v1/tipo/transaccion/eliminar
+- Metodos: **DELETE**
+- Parametro: **Long idTipoTransaccion**
+
+#### api/v1/tipo/transaccion/get
+- Metodos: **GET**
+- Parametro: **Long idTipoTransaccion**
+
+#### api/v1/unidades/guardar
+- Metodos: **POST**
+- Parametro: **Unidades unidade**
+
+#### api/v1/unidades/eliminar
+- Metodos: **DELETE**
+- Parametro: **Long id_unidad**
