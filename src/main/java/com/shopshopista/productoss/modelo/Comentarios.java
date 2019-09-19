@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name="Comentarios")
+@Table(name="\"Comentarios\"")
 public class Comentarios {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

@@ -5,9 +5,9 @@
  */
 package com.shopshopista.productoss.controladores;
 
-
 import com.shopshopista.productoss.modelo.Cardex;
-import com.shopshopista.productoss.repositorio.CardexRepositorio;
+import com.shopshopista.productoss.modelo.Lineas;
+import com.shopshopista.productoss.repositorio.LineasRepositorio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,36 +25,34 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1")
-public class CardexControlador {
+public class LineasControlador {
     
     @Autowired
-    private CardexRepositorio cardexRepositorio;
+    private LineasRepositorio lineasRepositorio;
 
-    @GetMapping("/cardex")
+    @GetMapping("/lineas")
     @CrossOrigin
-    public List<Cardex> getAllCardex() {
-        return this.cardexRepositorio.findAll();
+    public List<Lineas> getAllCardex() {
+        return this.lineasRepositorio.findAll();
     }
 
-    @RequestMapping(value = "/guardarcardex", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardarlinea", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Cardex createCardex(@RequestBody Cardex cardex) {
-        return this.cardexRepositorio.save(cardex);
+    public Lineas createLinea(@RequestBody Lineas lineas) {
+        return this.lineasRepositorio.save(lineas);
     }
 
-    @RequestMapping(value = "/eliminarcardex/{idCardex}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/eliminarlinea/{idLinea}", method = RequestMethod.DELETE)
     @ResponseBody
     @CrossOrigin
-    public void eliminarCardex(@PathVariable Long idCardex) {
-        this.cardexRepositorio.eliminarByIdCardex(idCardex);
+    public void eliminarLinea(@PathVariable Long idLinea) {
+        this.lineasRepositorio.eliminarByIdLineas(idLinea);
     }
-
-    @GetMapping("/cardex/{idCardex}")
-    @ResponseBody
-    public Cardex getCardexById(@PathVariable Long idCardex) {
-        return this.cardexRepositorio.buscarPorIdCardex(idCardex);
-    }
-
     
+     @GetMapping("/lineas/{idLinea}")
+    @ResponseBody
+    public Lineas getLineaById(@PathVariable Long idLinea) {
+        return this.lineasRepositorio.buscarPorIdLineas(idLinea);
+    }
 }

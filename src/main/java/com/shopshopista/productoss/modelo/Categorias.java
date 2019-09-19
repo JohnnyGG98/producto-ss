@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
  * @author
  */
 @Entity
-@Table(name = "Categorias")
+@Table(name = "\"Categorias\"")
 public class Categorias implements Serializable {
 
     @Id

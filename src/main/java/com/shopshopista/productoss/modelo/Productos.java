@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name = "Productos")
+@Table(name = "\"Productos\"")
 public class Productos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +58,7 @@ public class Productos implements Serializable {
     @JoinColumn(name = "id_marca")
     private Marcas id_marca;
 
-    @JsonBackReference(value="rf_linea")
+    @JsonBackReference(value="rf_producto-linea")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_linea")
     private Lineas id_linea;

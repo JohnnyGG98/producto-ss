@@ -36,10 +36,10 @@ public class Cardex {
     @Column(name = "capr_activo", nullable = false)
     private boolean capr_activo;
     
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_producto")
-//    @JsonBackReference(value = "cardex-producto")
-//    private Productos producto;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto")
+    @JsonBackReference(value = "cardex-producto")
+    private Productos producto;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tipo_transaccion ")

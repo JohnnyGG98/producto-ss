@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name="Marcas")
+@Table(name="\"Marcas\"")
 public class Marcas {
 
     @Id
