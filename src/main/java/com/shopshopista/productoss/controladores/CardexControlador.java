@@ -24,33 +24,33 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/cardex")
 public class CardexControlador {
     
     @Autowired
     private CardexRepositorio cardexRepositorio;
 
-    @GetMapping("/cardex")
+    @GetMapping("/")
     @CrossOrigin
     public List<Cardex> getAllCardex() {
         return this.cardexRepositorio.findAll();
     }
 
-    @RequestMapping(value = "/guardarcardex", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public Cardex createCardex(@RequestBody Cardex cardex) {
         return this.cardexRepositorio.save(cardex);
     }
 
-    @RequestMapping(value = "/eliminarcardex/{idCardex}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/eliminar/{idCardex}", method = RequestMethod.DELETE)
     @ResponseBody
     @CrossOrigin
     public void eliminarCardex(@PathVariable Long idCardex) {
         this.cardexRepositorio.eliminarByIdCardex(idCardex);
     }
 
-    @GetMapping("/cardex/{idCardex}")
+    @GetMapping("/{idCardex}")
     @ResponseBody
     public Cardex getCardexById(@PathVariable Long idCardex) {
         return this.cardexRepositorio.buscarPorIdCardex(idCardex);

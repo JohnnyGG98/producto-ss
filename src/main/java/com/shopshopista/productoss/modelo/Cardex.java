@@ -44,17 +44,26 @@ public class Cardex {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tipo_transaccion ")
     @JsonBackReference(value = "cardex-tipo-transaccion")
-    private TiposTransaccion tipoTrasaccion;
+    private TiposTransaccion tipoTransaccion;
 
     public Cardex() {
     }
 
-    public Cardex(Long id_cardex, Date capr_fecha_ingreso, int capr_num_producto, boolean capr_activo, TiposTransaccion tipoTrasaccion) {
+    public Cardex(Long id_cardex, Date capr_fecha_ingreso, int capr_num_producto, boolean capr_activo, Productos producto, TiposTransaccion tipoTransaccion) {
         this.id_cardex = id_cardex;
         this.capr_fecha_ingreso = capr_fecha_ingreso;
         this.capr_num_producto = capr_num_producto;
         this.capr_activo = capr_activo;
-        this.tipoTrasaccion = tipoTrasaccion;
+        this.producto = producto;
+        this.tipoTransaccion = tipoTransaccion;
+    }
+
+    public Productos getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Productos producto) {
+        this.producto = producto;
     }
 
     public Long getId_cardex() {
@@ -89,12 +98,12 @@ public class Cardex {
         this.capr_activo = capr_activo;
     }
 
-    public TiposTransaccion getTipoTrasaccion() {
-        return tipoTrasaccion;
+    public TiposTransaccion getTipoTransaccion() {
+        return tipoTransaccion;
     }
 
-    public void setTipoTrasaccion(TiposTransaccion tipoTrasaccion) {
-        this.tipoTrasaccion = tipoTrasaccion;
+    public void setTipoTrasaccion(TiposTransaccion tipoTransaccion) {
+        this.tipoTransaccion = tipoTransaccion;
     }
     
 }
