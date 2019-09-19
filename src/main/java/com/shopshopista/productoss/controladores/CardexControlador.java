@@ -46,7 +46,7 @@ public class CardexControlador {
         this.cardexRepositorio.eliminarByIdCardex(idCardex);
     }
 
-    @GetMapping("/{idCardex}")
+    @GetMapping("/get/{idCardex}")
     @ResponseBody
     public Cardex getCardexById(@PathVariable Long idCardex) {
         return this.cardexRepositorio.buscarPorIdCardex(idCardex);
