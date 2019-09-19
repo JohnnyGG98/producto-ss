@@ -36,7 +36,7 @@ public class TiposTransaccion {
     private boolean titr_activo;
     
     @JsonManagedReference(value = "cardex-tipo-transaccion")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoTrasaccion")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoTransaccion")
     private List<Cardex> cardex;
 
     public TiposTransaccion() {
