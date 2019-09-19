@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.controladores;
 
 import com.shopshopista.productoss.modelo.Marcas;
-import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.repositorio.MarcaRepositorio;
-import com.shopshopista.productoss.repositorio.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/Marcas")
+@RequestMapping("/api/v1/marca")
 public class MarcasControlador {
     
        @Autowired
     private MarcaRepositorio marcaRepositorio;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public Marcas guardar(@RequestBody @Valid Marcas marcas) {
         return this.marcaRepositorio.save(marcas);
     }
-      @GetMapping("/producto")
+      @GetMapping("/")
     @CrossOrigin
     public List<Marcas> getAllMarcas() {
         return this.marcaRepositorio.findAll();

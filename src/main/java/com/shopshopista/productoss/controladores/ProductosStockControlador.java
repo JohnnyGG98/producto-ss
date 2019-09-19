@@ -27,25 +27,25 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/ProductosStock")
+@RequestMapping("/api/v1/producto/stock")
 public class ProductosStockControlador {
     
     @Autowired
     private ProductosStockRepositorio productosStockRepositorio;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public ProductosStock guardar(@RequestBody @Valid ProductosStock productosStock) {
         return this.productosStockRepositorio.save(productosStock);
     }
-      @GetMapping("/producto")
+      @GetMapping("/")
     @CrossOrigin
     public List<ProductosStock> getAllProductos() {
         return this.productosStockRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_producto_stock}")
+    @DeleteMapping("/eliminar/{id_producto_stock}")
     @ResponseBody
     public void borrar(@PathVariable Long id_producto_stock) {
         this.productosStockRepositorio.eliminarProductosStock(id_producto_stock);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.controladores;
 
 
@@ -23,33 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/tipo/transaccion")
 public class TipoTransaccionControlador {
     
     @Autowired
     private TipoTransaccionRepositorio tipoTransaccionRep;
     
-    @GetMapping("/tipostransaccion")
+    @GetMapping("/")
     @CrossOrigin
     public List<TiposTransaccion> getAllTiposTransaccion() {
         return this.tipoTransaccionRep.findAll();
     }
 
-    @RequestMapping(value = "/tipotransaccion", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public TiposTransaccion createCardex(@RequestBody TiposTransaccion tipoTrasaccion) {
         return this.tipoTransaccionRep.save(tipoTrasaccion);
     }
     
-    @RequestMapping(value = "/eliminartipotransaccion/{idTipoTransaccion}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/eliminar/{idTipoTransaccion}", method = RequestMethod.DELETE)
     @ResponseBody
     @CrossOrigin
     public void eliminarTipoTransaccion(@PathVariable Long idTipoTransaccion){
         this.tipoTransaccionRep.eliminarByIdTipoTransaccion(idTipoTransaccion);
     } 
     
-    @GetMapping("/tipotransaccion/{idTipoTransaccion}")
+    @GetMapping("/{idTipoTransaccion}")
     @ResponseBody
     public TiposTransaccion getTipoTransaccionById(@PathVariable Long idTipoTransaccion) {
         return this.tipoTransaccionRep.buscarPorIdTipoTransaccion(idTipoTransaccion);

@@ -25,22 +25,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Daniel
  */
 @RestController
-@RequestMapping("/api/v1/Categoria")
+@RequestMapping("/api/v1/categoria")
+@CrossOrigin
 public class CategoriaControlador {
 
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 
-    
-
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public Categorias guardar(@RequestBody @Valid Categorias categoria) {
         return this.categoriaRepositorio.save(categoria);
     }
     
-    @GetMapping("/producto")
+    @GetMapping("/")
     @CrossOrigin
     public List<Categorias> getAllProductoCategoria() {
         return this.categoriaRepositorio.findAll();

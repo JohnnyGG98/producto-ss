@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.controladores;
 
-import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.modelo.Unidades;
-import com.shopshopista.productoss.repositorio.ProductosRepositorio;
 import com.shopshopista.productoss.repositorio.UnidadesRepositorio;
 import java.util.List;
 import javax.validation.Valid;
@@ -27,26 +20,26 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/Unidades")
+@RequestMapping("/api/v1/unidad")
 public class UnidadesControlador {
     
     
     @Autowired
     private UnidadesRepositorio unidadesRepositorio;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
     public Unidades guardar(@RequestBody @Valid Unidades unidades) {
         return this.unidadesRepositorio.save(unidades);
     }
-      @GetMapping("/producto")
+      @GetMapping("/")
     @CrossOrigin
     public List<Unidades> getAllProductos() {
         return this.unidadesRepositorio.findAll();
     }
 
-    @DeleteMapping("/{id_unidad}")
+    @DeleteMapping("/eliminar/{id_unidad}")
     @ResponseBody
     public void borrar(@PathVariable Long id_unidad) {
         this.unidadesRepositorio.eliminarUnidades(id_unidad);
