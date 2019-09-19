@@ -7,9 +7,11 @@ package com.shopshopista.productoss.repositorio;
 
 import com.shopshopista.productoss.modelo.Categorias;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -21,6 +23,8 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
     @Query(value = "SELECT c FROM Categorias c WHERE c.id_categoria = :idCategoria ")
     Categorias buscarCategoriaById(@Param("idCategoria") Long idCategoria);
 
+    @Transactional
+    @Modifying
     @Query(value = "UPDATE Categorias c SET c.cat_activo = false WHERE c.id_categoria = :idCategoria ")
     Categorias eliminarCategoria(@Param("idCategoria") Long idCategoria);
 
