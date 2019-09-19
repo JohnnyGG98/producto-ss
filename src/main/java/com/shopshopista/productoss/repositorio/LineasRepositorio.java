@@ -7,8 +7,10 @@ package com.shopshopista.productoss.repositorio;
 
 import com.shopshopista.productoss.modelo.Lineas;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -18,7 +20,8 @@ public interface LineasRepositorio extends JpaRepository<Lineas, Long>{
     
     @Query(value = "SELECT l FROM Lineas l WHERE l.id_linea = :idLinea")
     Lineas buscarPorIdLineas(@Param("idLinea") Long idLinea);
-    
+    @Transactional
+    @Modifying
     @Query(value = "UPDATE Lineas l SET l.lin_activo = false WHERE l.id_linea = :idLinea")
     void eliminarByIdLineas(@Param("idLinea") Long idLinea);
     

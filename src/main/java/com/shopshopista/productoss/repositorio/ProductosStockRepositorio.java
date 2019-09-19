@@ -7,9 +7,11 @@ package com.shopshopista.productoss.repositorio;
 
 import com.shopshopista.productoss.modelo.ProductosStock;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -20,7 +22,8 @@ public interface ProductosStockRepositorio extends JpaRepository<ProductosStock,
 
     @Query(value = "SELECT ps FROM ProductosStock ps WHERE ps.id_producto_stock = :idProductosStock ")
     ProductosStock buscarProductosStockById(@Param("idProductosStock") Long idProductosStock);
-
+ @Transactional
+    @Modifying
     @Query(value = "UPDATE ProductosStock ps SET ps.prst_activo = false WHERE ps.id_producto_stock = :idProductosStock ")
     ProductosStock eliminarProductosStock(@Param("idProductosStock") Long idProductosStock);
 
