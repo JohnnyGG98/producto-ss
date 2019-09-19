@@ -16,7 +16,10 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name="\"Unidades\"")
+@Table(
+        name="\"Unidades\"",
+        schema = "producto"
+)
 public class Unidades {
     
     @Id

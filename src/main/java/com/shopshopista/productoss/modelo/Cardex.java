@@ -22,7 +22,10 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name = "\"Cardex\"")
+@Table(
+        name = "\"Cardex\"",
+        schema = "producto"
+)
 public class Cardex {
     
     @Id

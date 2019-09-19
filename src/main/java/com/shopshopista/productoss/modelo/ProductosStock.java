@@ -26,7 +26,10 @@ import org.springframework.data.annotation.CreatedDate;
  * @author Linis
  */
 @Entity
-@Table(name = "\"ProductosStock\"")
+@Table(
+        name = "\"ProductosStock\"",
+        schema = "producto"
+)
 public class ProductosStock {
 
     @Id
