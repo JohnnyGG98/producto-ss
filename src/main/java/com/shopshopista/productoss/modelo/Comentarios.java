@@ -17,7 +17,10 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name="\"Comentarios\"")
+@Table(
+        name="\"Comentarios\"",
+        schema = "producto"
+)
 public class Comentarios {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

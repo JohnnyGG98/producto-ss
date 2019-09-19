@@ -24,7 +24,10 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name = "\"Productos\"")
+@Table(
+        name = "\"Productos\"",
+        schema = "producto"
+)
 public class Productos implements Serializable {
 
     private static final long serialVersionUID = 1L;

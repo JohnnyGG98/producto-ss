@@ -21,7 +21,10 @@ import javax.persistence.Table;
  * @author Linis
  */
 @Entity
-@Table(name = "\"ProductosCategorias\"")
+@Table(
+        name = "\"ProductosCategorias\"",
+        schema = "producto"
+)
 public class ProductosCategorias implements Serializable {
 
     @Id
