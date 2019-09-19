@@ -39,7 +39,7 @@ public class ProductosControlador {
         return this.productoRepositorio.findAll();
     }
 
-    @DeleteMapping("/producto/{id_producto}")
+    @DeleteMapping("/{id_producto}")
     @ResponseBody
     public void borrar(@PathVariable Long id_producto) {
         this.productoRepositorio.deleteById(id_producto);
