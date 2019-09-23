@@ -1,5 +1,6 @@
 package com.shopshopista.productoss.modelo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,8 +28,9 @@ public class Unidades {
     @Column(name="id_unidad")
     private Long id_unidad;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Productos> unidades;
+    @JsonManagedReference(value = "rf_unidad")
+    @OneToMany(mappedBy = "id_unidad", cascade = CascadeType.ALL)
+    private List<Productos> productos;
     
     @Column(name="unid_nombre")
     private String unid_nombre;
@@ -43,25 +45,9 @@ public class Unidades {
 
     public Unidades(Long id_unidad, List<Productos> unidades, String unid_nombre, String unid_codigo, boolean unid_activo) {
         this.id_unidad = id_unidad;
-        this.unidades = unidades;
+        this.productos = unidades;
         this.unid_nombre = unid_nombre;
         this.unid_codigo = unid_codigo;
-        this.unid_activo = unid_activo;
-    }
-
-    public List<Productos> getUnidades() {
-        return unidades;
-    }
-
-    public void setUnidades(List<Productos> unidades) {
-        this.unidades = unidades;
-    }
-
-    public boolean isUnid_activo() {
-        return unid_activo;
-    }
-
-    public void setUnid_activo(boolean unid_activo) {
         this.unid_activo = unid_activo;
     }
 
@@ -71,6 +57,14 @@ public class Unidades {
 
     public void setId_unidad(Long id_unidad) {
         this.id_unidad = id_unidad;
+    }
+
+    public List<Productos> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Productos> productos) {
+        this.productos = productos;
     }
 
     public String getUnid_nombre() {
@@ -88,6 +82,16 @@ public class Unidades {
     public void setUnid_codigo(String unid_codigo) {
         this.unid_codigo = unid_codigo;
     }
+
+    public boolean isUnid_activo() {
+        return unid_activo;
+    }
+
+    public void setUnid_activo(boolean unid_activo) {
+        this.unid_activo = unid_activo;
+    }
+
+    
 
     @Override
     public String toString() {

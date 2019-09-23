@@ -36,8 +36,8 @@ public class Marcas {
     private Long id_marca;
 
     @JsonManagedReference(value="rf_marca")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Productos> marcas;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id_marca")
+    private List<Productos> productos;
 
     @Column(name = "marc_nombre")
     private String marc_nombre;
@@ -51,20 +51,28 @@ public class Marcas {
     public Marcas() {
     }
 
-    public Marcas(Long id_marca, List<Productos> marcas, String marc_nombre, String marc_codigo, boolean marc_activo) {
+    public Marcas(Long id_marca, List<Productos> productos, String marc_nombre, String marc_codigo, boolean marc_activo) {
         this.id_marca = id_marca;
-        this.marcas = marcas;
+        this.productos = productos;
         this.marc_nombre = marc_nombre;
         this.marc_codigo = marc_codigo;
         this.marc_activo = marc_activo;
     }
-    
+
     public Long getId_marca() {
         return id_marca;
     }
 
     public void setId_marca(Long id_marca) {
         this.id_marca = id_marca;
+    }
+
+    public List<Productos> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Productos> productos) {
+        this.productos = productos;
     }
 
     public String getMarc_nombre() {
@@ -91,12 +99,6 @@ public class Marcas {
         this.marc_activo = marc_activo;
     }
 
-    public List<Productos> getMarcas() {
-        return marcas;
-    }
-
-    public void setMarcas(List<Productos> marcas) {
-        this.marcas = marcas;
-    }
+    
 
 }

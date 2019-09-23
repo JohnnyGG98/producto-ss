@@ -33,7 +33,8 @@ public class ProductosControlador {
     public Productos guardar(@RequestBody @Valid Productos producto) {
         return this.productoRepositorio.save(producto);
     }
-      @GetMapping("/")
+    
+    @GetMapping("/")
     @CrossOrigin
     public List<Productos> getAllProductos() {
         return this.productoRepositorio.findAll();
