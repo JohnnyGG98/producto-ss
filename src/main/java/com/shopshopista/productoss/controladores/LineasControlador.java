@@ -3,6 +3,7 @@ package com.shopshopista.productoss.controladores;
 import com.shopshopista.productoss.modelo.Lineas;
 import com.shopshopista.productoss.repositorio.LineasRepositorio;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,20 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/linea")
 @CrossOrigin
 public class LineasControlador {
-    
+
     @Autowired
     private LineasRepositorio lineasRepositorio;
 
     @GetMapping("/")
     @CrossOrigin
-    public List<Lineas> getAllCardex() {
+    public List<Lineas> getAllLineas() {
         return this.lineasRepositorio.findAll();
     }
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Lineas createLinea(@RequestBody Lineas lineas) {
+    public Lineas createLinea(@Valid @RequestBody Lineas lineas) {
         return this.lineasRepositorio.save(lineas);
     }
 
@@ -45,7 +46,7 @@ public class LineasControlador {
         this.lineasRepositorio.eliminarByIdLineas(idLinea);
     }
     
-     @GetMapping("/{idLinea}")
+    @GetMapping("/{idLinea}")
     @ResponseBody
     public Lineas getLineaById(@PathVariable Long idLinea) {
         return this.lineasRepositorio.buscarPorIdLineas(idLinea);
