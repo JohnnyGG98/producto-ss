@@ -22,8 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/unidad")
 public class UnidadesControlador {
-    
-    
+
     @Autowired
     private UnidadesRepositorio unidadesRepositorio;
 
@@ -33,7 +32,8 @@ public class UnidadesControlador {
     public Unidades guardar(@RequestBody @Valid Unidades unidades) {
         return this.unidadesRepositorio.save(unidades);
     }
-      @GetMapping("/")
+
+    @GetMapping("/")
     @CrossOrigin
     public List<Unidades> getAllProductos() {
         return this.unidadesRepositorio.findAll();
