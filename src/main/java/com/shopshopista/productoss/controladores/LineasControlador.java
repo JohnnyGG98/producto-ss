@@ -28,7 +28,7 @@ public class LineasControlador {
 
     @GetMapping("/")
     @CrossOrigin
-    public List<Lineas> getAllCardex() {
+    public List<Lineas> getAllLineas() {
         return this.lineasRepositorio.findAll();
     }
 
@@ -45,7 +45,7 @@ public class LineasControlador {
     public void eliminarLinea(@PathVariable Long idLinea) {
         this.lineasRepositorio.eliminarByIdLineas(idLinea);
     }
-
+    
     @GetMapping("/{idLinea}")
     @ResponseBody
     public Lineas getLineaById(@PathVariable Long idLinea) {
