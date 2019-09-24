@@ -40,7 +40,7 @@ public class Lineas {
     private boolean lin_activo;
     
     @JsonManagedReference(value = "rf_producto-linea")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_linea")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "linea")
     private List<Productos> productos;
 
     public Lineas() {

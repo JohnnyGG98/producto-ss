@@ -31,8 +31,8 @@ public class Categorias implements Serializable {
     private Long id_categoria;
     
     @JsonManagedReference(value = "rf_categoria")
-    @OneToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<ProductosCategorias> productosCategoria;
+    @OneToMany(mappedBy = "id_categoria", cascade = CascadeType.ALL)
+    private List<ProductosCategorias> productos;
     
     @Column(name = "cat_nombre", length = 50, nullable = false)
     private String cat_nombre;
@@ -46,24 +46,20 @@ public class Categorias implements Serializable {
     public Categorias() {
     }
 
-    public Categorias(Long id_categoria, List<ProductosCategorias> productosCategoria, String cat_nombre, String cat_codigo, boolean cat_activo) {
-        this.id_categoria = id_categoria;
-        this.productosCategoria = productosCategoria;
-        this.cat_nombre = cat_nombre;
-        this.cat_codigo = cat_codigo;
-        this.cat_activo = cat_activo;
-    }
-
-    public void setProductosCategoria(List<ProductosCategorias> productosCategoria) {
-        this.productosCategoria = productosCategoria;
-    }
-
     public Long getId_categoria() {
         return id_categoria;
     }
 
     public void setId_categoria(Long id_categoria) {
         this.id_categoria = id_categoria;
+    }
+
+    public List<ProductosCategorias> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductosCategorias> productos) {
+        this.productos = productos;
     }
 
     public String getCat_nombre() {

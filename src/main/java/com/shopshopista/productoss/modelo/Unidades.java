@@ -29,7 +29,7 @@ public class Unidades {
     private Long id_unidad;
     
     @JsonManagedReference(value = "rf_unidad")
-    @OneToMany(mappedBy = "id_unidad", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "unidad", cascade = CascadeType.ALL)
     private List<Productos> productos;
     
     @Column(name="unid_nombre")

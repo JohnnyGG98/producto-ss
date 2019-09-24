@@ -36,7 +36,7 @@ public class Marcas {
     private Long id_marca;
 
     @JsonManagedReference(value="rf_marca")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id_marca")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "marca")
     private List<Productos> productos;
 
     @Column(name = "marc_nombre")

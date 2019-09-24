@@ -9,14 +9,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -41,11 +39,11 @@ public class Productos implements Serializable {
     private Long id_vendedor;
 
     @JsonManagedReference(value = "rf_productocategoria")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductosCategorias> categoriasProducto;
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
+    private List<ProductosCategorias> categorias;
     
     @JsonManagedReference(value = "rf_imagenes")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
     private List<Imagenes> imagenes;
 
     @Column(name = "prod_nombre", length = 255, nullable = false)
@@ -54,17 +52,17 @@ public class Productos implements Serializable {
     @JsonBackReference(value="rf_unidad")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_unidad")
-    private Unidades id_unidad;
+    private Unidades unidad;
 
     @JsonBackReference(value="rf_marca")
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_marca")
-    private Marcas id_marca;
+    private Marcas marca;
 
     @JsonBackReference(value="rf_producto-linea")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_linea")
-    private Lineas id_linea;
+    private Lineas linea;
     
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
@@ -96,28 +94,6 @@ public class Productos implements Serializable {
     @Column(name = "prod_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
     private boolean prod_activo;
 
-    public Productos() {
-
-    }
-
-    public Productos(Long id_producto, Long id_vendedor, List<ProductosCategorias> categoriasProducto, List<Imagenes> imagenes, String prod_nombre, Unidades id_unidad, Marcas id_marca, Lineas id_linea, LocalDateTime prod_fecha_Ingreso, int prod_stock_total, String prod_marca, double prod_precio_venta, String prod_descripcion, int prod_restriccion_edad_max, int prod_restriccion_edad_min, boolean prod_activo) {
-        this.id_producto = id_producto;
-        this.id_vendedor = id_vendedor;
-        this.categoriasProducto = categoriasProducto;
-        this.imagenes = imagenes;
-        this.prod_nombre = prod_nombre;
-        this.id_unidad = id_unidad;
-        this.id_marca = id_marca;
-        this.id_linea = id_linea;
-        this.prod_fecha_Ingreso = prod_fecha_Ingreso;
-        this.prod_stock_total = prod_stock_total;
-        this.prod_precio_venta = prod_precio_venta;
-        this.prod_descripcion = prod_descripcion;
-        this.prod_restriccion_edad_max = prod_restriccion_edad_max;
-        this.prod_restriccion_edad_min = prod_restriccion_edad_min;
-        this.prod_activo = prod_activo;
-    }
-
     public Long getId_producto() {
         return id_producto;
     }
@@ -134,12 +110,12 @@ public class Productos implements Serializable {
         this.id_vendedor = id_vendedor;
     }
 
-    public List<ProductosCategorias> getCategoriasProducto() {
-        return categoriasProducto;
+    public List<ProductosCategorias> getCategorias() {
+        return categorias;
     }
 
-    public void setCategoriasProducto(List<ProductosCategorias> categoriasProducto) {
-        this.categoriasProducto = categoriasProducto;
+    public void setCategorias(List<ProductosCategorias> categorias) {
+        this.categorias = categorias;
     }
 
     public List<Imagenes> getImagenes() {
@@ -158,28 +134,28 @@ public class Productos implements Serializable {
         this.prod_nombre = prod_nombre;
     }
 
-    public Unidades getId_unidad() {
-        return id_unidad;
+    public Unidades getUnidad() {
+        return unidad;
     }
 
-    public void setId_unidad(Unidades id_unidad) {
-        this.id_unidad = id_unidad;
+    public void setUnidad(Unidades unidad) {
+        this.unidad = unidad;
     }
 
-    public Marcas getId_marca() {
-        return id_marca;
+    public Marcas getMarca() {
+        return marca;
     }
 
-    public void setId_marca(Marcas id_marca) {
-        this.id_marca = id_marca;
+    public void setMarca(Marcas marca) {
+        this.marca = marca;
     }
 
-    public Lineas getId_linea() {
-        return id_linea;
+    public Lineas getLinea() {
+        return linea;
     }
 
-    public void setId_linea(Lineas id_linea) {
-        this.id_linea = id_linea;
+    public void setLinea(Lineas linea) {
+        this.linea = linea;
     }
 
     public LocalDateTime getProd_fecha_Ingreso() {
@@ -261,12 +237,6 @@ public class Productos implements Serializable {
     public void setProd_activo(boolean prod_activo) {
         this.prod_activo = prod_activo;
     }
-    
-    
-    
-    @Override
-    public String toString() {
-            return "Productos{" + "id_producto=" + id_producto + ", prod_nombre=" + prod_nombre + ", prod_fecha_Ingreso=" + prod_fecha_Ingreso + ", prod_stock_total=" + prod_stock_total + ", prod_precio_venta=" + prod_precio_venta + ", prod_descripcion=" + prod_descripcion + ", prod_restriccion_edad_max=" + prod_restriccion_edad_max + ", prod_restriccion_edad_min=" + prod_restriccion_edad_min + ", prod_activo=" + prod_activo + '}';
-    }
 
+    
 }
