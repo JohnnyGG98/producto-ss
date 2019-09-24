@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,35 +19,35 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(
-        name="\"Comentarios\"",
+        name = "\"Comentarios\"",
         schema = "producto"
 )
-public class Comentarios {
+public class Comentarios implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    @Column(name="id_comentario", nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(name = "id_comentario", nullable = false)
     private Long id_comentario;
-    
-    @Column(name="id_producto",nullable=false)
-    private Long id_producto;
-    
-    @Column(name="comentario", nullable=false)
+
+    @Column(name = "id_cliente", nullable = false)
+    private Long id_cliente;
+
+    @Column(name = "comentario", nullable = false)
     private String comentario;
-   
-    @Column (name="com_activo", columnDefinition="BOOLEAN DEFAULT 'true'")
+
+    @Column(name = "com_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean com_activo;
+
+    // Referencias  
+    @JsonBackReference(value = "rf_comentario")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto")
+    private Productos producto;
 
     public Comentarios() {
     }
 
-    public Comentarios(Long id_comentario, Long id_producto, String comentario, boolean com_activo) {
-        this.id_comentario = id_comentario;
-        this.id_producto = id_producto;
-        this.comentario = comentario;
-        this.com_activo = com_activo;
-    }
-    
     public Long getId_comentario() {
         return id_comentario;
     }
@@ -55,12 +56,12 @@ public class Comentarios {
         this.id_comentario = id_comentario;
     }
 
-    public Long getId_producto() {
-        return id_producto;
+    public Long getId_cliente() {
+        return id_cliente;
     }
 
-    public void setId_producto(Long id_producto) {
-        this.id_producto = id_producto;
+    public void setId_cliente(Long id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getComentario() {
@@ -79,12 +80,17 @@ public class Comentarios {
         this.com_activo = com_activo;
     }
 
-    @Override
-    public String toString() {
-        return "Comentarios{" + "id_comentario=" + id_comentario + ", id_producto=" + id_producto + ", comentario=" + comentario + ", com_activo=" + com_activo + '}';
+    public Productos getProducto() {
+        return producto;
     }
 
-    
-    
-    
+    public void setProducto(Productos producto) {
+        this.producto = producto;
+    }
+
+    @Override
+    public String toString() {
+        return "Comentarios{" + "id_comentario=" + id_comentario + ", id_cliente=" + id_cliente + ", comentario=" + comentario + ", com_activo=" + com_activo + ", producto=" + producto + '}';
+    }
+
 }

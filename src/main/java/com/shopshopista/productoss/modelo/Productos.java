@@ -34,42 +34,46 @@ public class Productos implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_producto", nullable = false)
     private Long id_producto;
-    
+
     @Column(name = "id_vendedor ", nullable = false)
     private Long id_vendedor;
 
     @JsonManagedReference(value = "rf_productocategoria")
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
     private List<ProductosCategorias> categorias;
-    
+
     @JsonManagedReference(value = "rf_imagenes")
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
     private List<Imagenes> imagenes;
 
+    @JsonBackReference(value = "rf_comentario")
+    @OneToMany(mappedBy = "id_comentario", cascade = CascadeType.ALL)
+    private List<Comentarios> comentarios;
+
     @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
 
-    @JsonBackReference(value="rf_unidad")
+    @JsonBackReference(value = "rf_unidad")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_unidad")
     private Unidades unidad;
 
-    @JsonBackReference(value="rf_marca")
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonBackReference(value = "rf_marca")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_marca")
     private Marcas marca;
 
-    @JsonBackReference(value="rf_producto-linea")
+    @JsonBackReference(value = "rf_producto-linea")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_linea")
     private Lineas linea;
-    
+
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
     private LocalDateTime prod_fecha_Ingreso;
-    
+
     @Column(name = "prod_stock_max", nullable = false)
     private int prod_stock_max;
-    
+
     @Column(name = "prod_stock_min", nullable = false)
     private int prod_stock_min;
 
@@ -87,7 +91,7 @@ public class Productos implements Serializable {
 
     @Column(name = "prod_restriccion_edad_min", nullable = false)
     private int prod_restriccion_edad_min;
-    
+
     @Column(name = "prod_tiene_iva", columnDefinition = "BOOLEAN DEFAULT  'true' ")
     private boolean prod_tiene_iva;
 
@@ -238,5 +242,12 @@ public class Productos implements Serializable {
         this.prod_activo = prod_activo;
     }
 
-    
+    public List<Comentarios> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentarios> comentarios) {
+        this.comentarios = comentarios;
+    }
+
 }

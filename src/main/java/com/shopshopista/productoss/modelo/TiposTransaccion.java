@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  *
  * @author Linis
@@ -25,19 +22,19 @@ import javax.persistence.Table;
         name = "\"TiposTransaccion\"",
         schema = "producto"
 )
-public class TiposTransaccion {
-    
+public class TiposTransaccion implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_tipo_transaccion;
-    
+
     @Column(name = "titr_nombre", nullable = false)
     private String titr_nombre;
     @Column(name = "titr_codigo", nullable = false)
     private String titr_codigo;
     @Column(name = "titr_activo", nullable = false)
     private boolean titr_activo;
-    
+
     @JsonManagedReference(value = "cardex-tipo-transaccion")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoTransaccion")
     private List<Cardex> cardex;
@@ -92,7 +89,5 @@ public class TiposTransaccion {
     public void setCardex(List<Cardex> cardex) {
         this.cardex = cardex;
     }
-    
-    
-}
 
+}

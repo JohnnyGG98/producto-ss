@@ -32,26 +32,18 @@ public class ProductosCategorias implements Serializable {
     @JoinColumn(name = "id_producto")
     @JsonBackReference(value="rf_productocategoria")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Productos id_producto;
+    private Productos producto;
 
     @JoinColumn(name = "id_categoria")
     @JsonBackReference(value="rf_categoria")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Categorias id_categoria;
+    private Categorias categoria;
 
     @Column(name = "prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean prca_activo;
 
     public ProductosCategorias() {
     }
-
-    public ProductosCategorias(Long id_producto_categoria, Productos id_producto, Categorias id_categoria, boolean prca_activo) {
-        this.id_producto_categoria = id_producto_categoria;
-        this.id_producto = id_producto;
-        this.id_categoria = id_categoria;
-        this.prca_activo = prca_activo;
-    }
-    
 
     public Long getId_producto_categoria() {
         return id_producto_categoria;
@@ -61,20 +53,20 @@ public class ProductosCategorias implements Serializable {
         this.id_producto_categoria = id_producto_categoria;
     }
 
-    public Productos getId_producto() {
-        return id_producto;
+    public Productos getProducto() {
+        return producto;
     }
 
-    public void setId_producto(Productos id_producto) {
-        this.id_producto = id_producto;
+    public void setProducto(Productos producto) {
+        this.producto = producto;
     }
 
-    public Categorias getId_categoria() {
-        return id_categoria;
+    public Categorias getCategoria() {
+        return categoria;
     }
 
-    public void setId_categoria(Categorias id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
     }
 
     public boolean isPrca_activo() {
@@ -87,14 +79,7 @@ public class ProductosCategorias implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductosCategorias{"
-                + "id_producto_categoria="
-                + id_producto_categoria + ", id_producto="
-                + id_producto
-                + ", id_categoria="
-                + id_categoria
-                + ", prca_activo="
-                + prca_activo + '}';
+        return "ProductosCategorias{" + "id_producto_categoria=" + id_producto_categoria + ", producto=" + producto + ", categoria=" + categoria + ", prca_activo=" + prca_activo + '}';
     }
 
 }

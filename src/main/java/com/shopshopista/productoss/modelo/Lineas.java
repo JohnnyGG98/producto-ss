@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shopshopista.productoss.modelo;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,19 +22,19 @@ import javax.persistence.Table;
         name = "\"Lineas\"",
         schema = "producto"
 )
-public class Lineas {
-    
+public class Lineas implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_linea ;
-        
+    private Long id_linea;
+
     @Column(name = "lin_nombre ", nullable = false)
     private String lin_nombre;
     @Column(name = "lin_codigo", nullable = false)
     private String lin_codigo;
     @Column(name = "lin_activo", nullable = false)
     private boolean lin_activo;
-    
+
     @JsonManagedReference(value = "rf_producto-linea")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "linea")
     private List<Productos> productos;
@@ -93,9 +89,5 @@ public class Lineas {
     public void setProductos(List<Productos> productos) {
         this.productos = productos;
     }
-    
-    
-    
-    
-    
+
 }

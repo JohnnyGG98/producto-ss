@@ -1,6 +1,7 @@
 package com.shopshopista.productoss.modelo;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,30 +18,31 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(
-        name="\"Unidades\"",
+        name = "\"Unidades\"",
         schema = "producto"
 )
-public class Unidades {
-    
+public class Unidades implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_unidad")
+    @Column(name = "id_unidad")
     private Long id_unidad;
-    
+
     @JsonManagedReference(value = "rf_unidad")
     @OneToMany(mappedBy = "unidad", cascade = CascadeType.ALL)
     private List<Productos> productos;
-    
-    @Column(name="unid_nombre")
+
+    @Column(name = "unid_nombre")
     private String unid_nombre;
-    
-    @Column(name="unid_codigo")
+
+    @Column(name = "unid_codigo")
     private String unid_codigo;
 
-    @Column(name="unid_activo",columnDefinition = "BOOLEAN DEFAULT 'true'" )
+    @Column(name = "unid_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
     private boolean unid_activo;
-    
-    public Unidades(){}
+
+    public Unidades() {
+    }
 
     public Unidades(Long id_unidad, List<Productos> unidades, String unid_nombre, String unid_codigo, boolean unid_activo) {
         this.id_unidad = id_unidad;
@@ -91,13 +92,9 @@ public class Unidades {
         this.unid_activo = unid_activo;
     }
 
-    
-
     @Override
     public String toString() {
         return "Unidades{" + "id_unidad=" + id_unidad + ", unid_nombre=" + unid_nombre + ", unid_codigo=" + unid_codigo + '}';
     }
 
-   
-    
 }

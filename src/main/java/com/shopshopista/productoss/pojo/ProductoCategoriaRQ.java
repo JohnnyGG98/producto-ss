@@ -4,7 +4,7 @@ package com.shopshopista.productoss.pojo;
  *
  * @author gus
  */
-public class ProductoCategoria {
+public class ProductoCategoriaRQ {
 
     private long id_producto;
 

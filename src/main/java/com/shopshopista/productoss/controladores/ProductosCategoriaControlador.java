@@ -3,7 +3,7 @@ package com.shopshopista.productoss.controladores;
 import com.shopshopista.productoss.modelo.Categorias;
 import com.shopshopista.productoss.modelo.Productos;
 import com.shopshopista.productoss.modelo.ProductosCategorias;
-import com.shopshopista.productoss.pojo.ProductoCategoria;
+import com.shopshopista.productoss.pojo.ProductoCategoriaRQ;
 import com.shopshopista.productoss.repositorio.CategoriaRepositorio;
 import com.shopshopista.productoss.repositorio.ProductosCategoriasRepositorio;
 import com.shopshopista.productoss.repositorio.ProductosRepositorio;
@@ -49,12 +49,12 @@ public class ProductosCategoriaControlador {
     @RequestMapping(value = "/solo", method = RequestMethod.POST)
     @ResponseBody
     public ProductosCategorias guardar(
-            @RequestBody ProductoCategoria pc
+            @RequestBody ProductoCategoriaRQ pc
     ) throws Exception {
         ProductosCategorias pcm = new ProductosCategorias();
         Categorias c = categoriaRepo.buscarCategoriaById(pc.getId_categoria());
-        pcm.setId_categoria(c);
-        pcm.setId_producto(productoRepo.buscarProductosById(pc.getId_producto()));
+        pcm.setCategoria(c);
+        pcm.setProducto(productoRepo.buscarProductosById(pc.getId_producto()));
 
         return productoCategoriaRepositorio.save(pcm);
     }
