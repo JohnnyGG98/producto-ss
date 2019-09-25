@@ -12,12 +12,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "titr_activo = true")
+@Entity(
+        name = "TiposTransaccion"
+)
 @Table(
         name = "\"TiposTransaccion\"",
         schema = "producto"
@@ -25,7 +29,7 @@ import javax.persistence.Table;
 public class TiposTransaccion implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tipo_transaccion;
 
     @Column(name = "titr_nombre", nullable = false)
@@ -33,7 +37,7 @@ public class TiposTransaccion implements Serializable {
     @Column(name = "titr_codigo", nullable = false)
     private String titr_codigo;
     @Column(name = "titr_activo", nullable = false)
-    private boolean titr_activo;
+    private boolean titr_activo = true;
 
     @JsonManagedReference(value = "cardex-tipo-transaccion")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoTransaccion")

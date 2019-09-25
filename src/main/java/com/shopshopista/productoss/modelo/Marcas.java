@@ -11,12 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "marc_activo = true")
+@Entity(
+        name = "Marcas"
+)
 @Table(
         name="\"Marcas\"",
         schema = "producto"
@@ -24,7 +28,7 @@ import javax.persistence.Table;
 public class Marcas implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_marca")
     private Long id_marca;
 
@@ -39,7 +43,7 @@ public class Marcas implements Serializable {
     private String marc_codigo;
 
     @Column(name = "marc_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
-    private boolean marc_activo;
+    private boolean marc_activo = true;
 
     public Marcas() {
     }

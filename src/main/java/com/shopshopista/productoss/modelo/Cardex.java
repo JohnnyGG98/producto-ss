@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +14,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "capr_activo = true")
+@Entity(
+        name = "Cardex"
+)
 @Table(
         name = "\"Cardex\"",
         schema = "producto"
@@ -28,7 +31,7 @@ import javax.persistence.Table;
 public class Cardex {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cardex;
 
     @Column(name = "capr_fecha_ingreso ", nullable = false)
@@ -36,7 +39,7 @@ public class Cardex {
     @Column(name = "capr_num_producto", nullable = false)
     private int capr_num_producto;
     @Column(name = "capr_activo", nullable = false)
-    private boolean capr_activo;
+    private boolean capr_activo = true;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")

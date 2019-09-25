@@ -11,12 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "unid_activo = true")
+@Entity(
+        name = "Unidades"
+)
 @Table(
         name = "\"Unidades\"",
         schema = "producto"
@@ -24,7 +28,7 @@ import javax.persistence.Table;
 public class Unidades implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_unidad")
     private Long id_unidad;
 
@@ -39,7 +43,7 @@ public class Unidades implements Serializable {
     private String unid_codigo;
 
     @Column(name = "unid_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
-    private boolean unid_activo;
+    private boolean unid_activo = true;
 
     public Unidades() {
     }

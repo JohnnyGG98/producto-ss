@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "com_activo = true")
+@Entity(
+        name = "Comentarios"
+)
 @Table(
         name = "\"Comentarios\"",
         schema = "producto"
@@ -25,7 +29,7 @@ import javax.persistence.Table;
 public class Comentarios implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id_comentario", nullable = false)
     private Long id_comentario;
@@ -37,7 +41,7 @@ public class Comentarios implements Serializable {
     private String comentario;
 
     @Column(name = "com_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
-    private boolean com_activo;
+    private boolean com_activo = true;
 
     // Referencias  
     @JsonBackReference(value = "rf_comentario")

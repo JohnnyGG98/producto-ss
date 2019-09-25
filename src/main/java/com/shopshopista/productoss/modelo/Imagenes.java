@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "ima_activo = true")
+@Entity(
+        name = "Imagenes"
+)
 @Table(
         name="\"Imagenes\"",
         schema = "producto"
@@ -25,7 +29,7 @@ import javax.persistence.Table;
 public class Imagenes implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     @Column(name="id_imagen", nullable=false)
     private Long id_imagen;
@@ -36,7 +40,7 @@ public class Imagenes implements Serializable {
     private Productos producto;
     
     @Column(name="ima_activo",columnDefinition = "BOOLEAN DEFAULT 'true'")
-    private boolean ima_activo;
+    private boolean ima_activo = true;
 
     public Imagenes() {
     }

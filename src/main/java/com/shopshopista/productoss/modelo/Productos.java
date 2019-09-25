@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,12 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "prod_activo = true")
+@Entity(
+        name = "Productos"
+)
 @Table(
         name = "\"Productos\"",
         schema = "producto"
@@ -31,7 +37,7 @@ public class Productos implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto", nullable = false)
     private Long id_producto;
 
@@ -69,7 +75,7 @@ public class Productos implements Serializable {
     private Lineas linea;
 
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
-    private LocalDateTime prod_fecha_Ingreso;
+    private LocalDateTime prod_fecha_Ingreso = ZonedDateTime.now(ZoneId.of("America/Guayaquil")).toLocalDateTime();;
 
     @Column(name = "prod_stock_max", nullable = false)
     private int prod_stock_max;
@@ -93,10 +99,10 @@ public class Productos implements Serializable {
     private int prod_restriccion_edad_min;
 
     @Column(name = "prod_tiene_iva", columnDefinition = "BOOLEAN DEFAULT  'true' ")
-    private boolean prod_tiene_iva;
+    private boolean prod_tiene_iva = true;
 
     @Column(name = "prod_activo", columnDefinition = "BOOLEAN DEFAULT  'true' ")
-    private boolean prod_activo;
+    private boolean prod_activo = true;
 
     public Long getId_producto() {
         return id_producto;

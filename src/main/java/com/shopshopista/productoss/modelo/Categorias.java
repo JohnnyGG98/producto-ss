@@ -13,12 +13,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author
  */
-@Entity
+@Where(clause = "cat_activo = true")
+@Entity(
+    name = "Categorias"
+)
 @Table(
         name = "\"Categorias\"",
         schema = "producto"
@@ -26,7 +30,7 @@ import javax.persistence.OneToMany;
 public class Categorias implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria", nullable = false)
     private Long id_categoria;
     
@@ -41,7 +45,7 @@ public class Categorias implements Serializable {
     private String cat_codigo;
 
     @Column(name = "cat_activo", columnDefinition = "BOOLEAN DEFAULT 'true' ")
-    private boolean cat_activo;
+    private boolean cat_activo = true;
 
     public Categorias() {
     }

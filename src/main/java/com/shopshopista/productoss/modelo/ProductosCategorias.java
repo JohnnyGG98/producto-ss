@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Where;
 
 /**
  *
  * @author Linis
  */
-@Entity
+@Where(clause = "prca_activo = true")
+@Entity(
+        name = "ProductosCategorias"
+)
 @Table(
         name = "\"ProductosCategorias\"",
         schema = "producto"
@@ -25,7 +29,7 @@ import javax.persistence.Table;
 public class ProductosCategorias implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto_categoria", nullable = false)
     private Long id_producto_categoria;
     
@@ -40,7 +44,7 @@ public class ProductosCategorias implements Serializable {
     private Categorias categoria;
 
     @Column(name = "prca_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")
-    private boolean prca_activo;
+    private boolean prca_activo = true;
 
     public ProductosCategorias() {
     }
