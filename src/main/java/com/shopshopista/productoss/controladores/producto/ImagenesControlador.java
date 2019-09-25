@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/imagen")
+@RequestMapping("/api/v1/producto/imagen")
 @CrossOrigin
 public class ImagenesControlador {
     
