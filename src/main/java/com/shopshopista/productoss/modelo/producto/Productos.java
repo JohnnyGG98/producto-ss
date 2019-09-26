@@ -45,15 +45,15 @@ public class Productos implements Serializable {
     private Long id_vendedor;
 
     @JsonManagedReference(value = "rf_productocategoria")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<ProductosCategorias> categorias;
 
     @JsonManagedReference(value = "rf_imagenes")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Imagenes> imagenes;
 
     @JsonBackReference(value = "rf_comentario")
-    @OneToMany(mappedBy = "id_comentario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Comentarios> comentarios;
 
     @Column(name = "prod_nombre", length = 255, nullable = false)

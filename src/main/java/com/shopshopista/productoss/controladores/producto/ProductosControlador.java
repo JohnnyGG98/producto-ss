@@ -45,4 +45,10 @@ public class ProductosControlador {
     public void borrar(@PathVariable Long id_producto) {
         this.productoRepositorio.deleteById(id_producto);
     }
+    
+    @GetMapping("/productobyid/{id_producto}")
+    @CrossOrigin
+    public Productos getProductoById(Long id_producto){
+        return this.productoRepositorio.buscarProductosById(id_producto);
+    }
 }

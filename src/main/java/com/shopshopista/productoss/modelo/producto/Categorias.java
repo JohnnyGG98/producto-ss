@@ -35,7 +35,7 @@ public class Categorias implements Serializable {
     private Long id_categoria;
     
     @JsonManagedReference(value = "rf_categoria")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<ProductosCategorias> productos;
     
     @Column(name = "cat_nombre", length = 50, nullable = false)
