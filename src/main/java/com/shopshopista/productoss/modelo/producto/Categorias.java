@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
  */
 @Where(clause = "cat_activo = true")
 @Entity(
-    name = "Categorias"
+        name = "Categorias"
 )
 @Table(
         name = "\"Categorias\"",
@@ -33,11 +33,11 @@ public class Categorias implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria", nullable = false)
     private Long id_categoria;
-    
+
     @JsonManagedReference(value = "rf_categoria")
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<ProductosCategorias> productos;
-    
+
     @Column(name = "cat_nombre", length = 50, nullable = false)
     private String cat_nombre;
 
