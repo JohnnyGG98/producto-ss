@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,10 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/comentario")
-@CrossOrigin
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class ComentariosControlador {
-    
-     @Autowired
+
+    @Autowired
     private ComentariosRepositorio comentarioRepositorio;
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
@@ -33,11 +34,23 @@ public class ComentariosControlador {
     public Comentarios guardar(@RequestBody @Valid Comentarios comentario) {
         return this.comentarioRepositorio.save(comentario);
     }
-    
-     @GetMapping("/")
+
+    @GetMapping("/")
     @CrossOrigin
     public List<Comentarios> getAllComentarios() {
         return this.comentarioRepositorio.findAll();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Comentarios seleccionarId(@Valid @PathVariable Long id) {
+        System.out.println("Le pasamos: " + id);
+        return this.comentarioRepositorio.findById(id).get();
+    }
+
+    @PutMapping(path = {"/actualizar/{id_comentario}"})
+    public Comentarios actualizar(@RequestBody Comentarios v, @PathVariable("id_comentario") Long id_comentario) {
+        return this.comentarioRepositorio.save(v);
     }
 
     @DeleteMapping("/eliminar/{id_comentario}")
