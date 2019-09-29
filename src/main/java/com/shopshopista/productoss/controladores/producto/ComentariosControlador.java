@@ -1,7 +1,9 @@
 package com.shopshopista.productoss.controladores.producto;
 
 import com.shopshopista.productoss.modelo.producto.Comentarios;
+import com.shopshopista.productoss.pojo.ComentarioProductoRQ;
 import com.shopshopista.productoss.repositorio.producto.ComentariosRepositorio;
+import com.shopshopista.productoss.repositorio.producto.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,19 @@ public class ComentariosControlador {
 
     @Autowired
     private ComentariosRepositorio comentarioRepositorio;
+    
+    @Autowired ProductosRepositorio pr;
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Comentarios guardar(@RequestBody @Valid Comentarios comentario) {
-        return this.comentarioRepositorio.save(comentario);
+    public Comentarios guardar(@RequestBody @Valid ComentarioProductoRQ comentario) {
+        Comentarios com = new Comentarios();
+        com.setId_comentario(comentario.getId_comentario());
+        com.setComentario(comentario.getComentario());
+        com.setId_cliente(comentario.getId_cliente());
+        com.setProducto(pr.findById(comentario.getId_producto()).get());
+        return this.comentarioRepositorio.save(com);
     }
 
     @GetMapping("/")
