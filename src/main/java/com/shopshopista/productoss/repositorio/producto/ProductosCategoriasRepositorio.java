@@ -6,6 +6,7 @@
 package com.shopshopista.productoss.repositorio.producto;
 
 import com.shopshopista.productoss.modelo.producto.Marcas;
+import com.shopshopista.productoss.modelo.producto.Productos;
 import com.shopshopista.productoss.modelo.producto.ProductosCategorias;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

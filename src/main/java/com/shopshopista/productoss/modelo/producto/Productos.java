@@ -52,7 +52,7 @@ public class Productos implements Serializable {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Imagenes> imagenes;
 
-    @JsonBackReference(value = "rf_comentario")
+    @JsonManagedReference(value = "rf_comentario")
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Comentarios> comentarios;
 

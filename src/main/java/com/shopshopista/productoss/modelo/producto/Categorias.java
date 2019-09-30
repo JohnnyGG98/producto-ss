@@ -31,7 +31,7 @@ public class Categorias implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria", nullable = false)
+    @Column(name = "id_categoria")
     private Long id_categoria;
 
     @JsonManagedReference(value = "rf_categoria")
