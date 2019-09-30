@@ -2,7 +2,6 @@ package com.shopshopista.productoss.modelo.transaccion;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.shopshopista.productoss.modelo.producto.Productos;
-import com.shopshopista.productoss.modelo.transaccion.TiposTransaccion;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -24,17 +23,17 @@ import org.hibernate.annotations.Where;
  */
 @Where(clause = "capr_activo = true")
 @Entity(
-        name = "Cardex"
+        name = "Kardex"
 )
 @Table(
-        name = "\"Cardex\"",
+        name = "\"Kardex\"",
         schema = "producto"
 )
-public class Cardex {
+public class Kardex {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_cardex;
+    private Long id_kardex;
 
     @Column(name = "capr_fecha_ingreso ", nullable = false)
     private LocalDateTime capr_fecha_ingreso = ZonedDateTime.now(ZoneId.of("America/Guayaquil")).toLocalDateTime();
@@ -45,23 +44,23 @@ public class Cardex {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")
-    @JsonBackReference(value = "cardex-producto")
+    @JsonBackReference(value = "kardex-producto")
     private Productos producto;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tipo_transaccion ")
-    @JsonBackReference(value = "cardex-tipo-transaccion")
+    @JsonBackReference(value = "kardex-tipo-transaccion")
     private TiposTransaccion tipoTransaccion;
 
-    public Cardex() {
+    public Kardex() {
     }
 
-    public Long getId_cardex() {
-        return id_cardex;
+    public Long getId_kardex() {
+        return id_kardex;
     }
 
-    public void setId_cardex(Long id_cardex) {
-        this.id_cardex = id_cardex;
+    public void setId_kardex(Long id_kardex) {
+        this.id_kardex = id_kardex;
     }
 
     public LocalDateTime getCapr_fecha_ingreso() {
