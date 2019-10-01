@@ -1,9 +1,13 @@
 package com.shopshopista.productoss.controladores.producto;
 
+
+
 import com.shopshopista.productoss.modelo.producto.Categorias;
 import com.shopshopista.productoss.repositorio.producto.CategoriaRepositorio;
 import java.util.List;
 import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class CategoriaControlador {
 
+	
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 
@@ -45,4 +50,9 @@ public class CategoriaControlador {
     public void borrar(@PathVariable Long id_categoria) {
         this.categoriaRepositorio.eliminarCategoria(id_categoria);
     }
+    
+    @GetMapping(path= {"/{id}"})
+	 public Categorias seleccionarId(@PathVariable("id") Long id) {
+		 return this.categoriaRepositorio.getOne(id);
+	 }
 }
