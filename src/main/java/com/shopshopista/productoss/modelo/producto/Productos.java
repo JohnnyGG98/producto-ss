@@ -56,6 +56,10 @@ public class Productos implements Serializable {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Comentarios> comentarios;
 
+    @JsonManagedReference(value = "rf_calificacion")
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Calificaciones> calificaciones;
+
     @Column(name = "prod_nombre", length = 255, nullable = false)
     private String prod_nombre;
 
@@ -75,7 +79,8 @@ public class Productos implements Serializable {
     private Lineas linea;
 
     @Column(name = "prod_fecha_Ingreso", columnDefinition = "timestamp DEFAULT now()")
-    private LocalDateTime prod_fecha_Ingreso = ZonedDateTime.now(ZoneId.of("America/Guayaquil")).toLocalDateTime();;
+    private LocalDateTime prod_fecha_Ingreso = ZonedDateTime.now(ZoneId.of("America/Guayaquil")).toLocalDateTime();
+    ;
 
     @Column(name = "prod_stock_max", nullable = false)
     private int prod_stock_max;
@@ -254,6 +259,14 @@ public class Productos implements Serializable {
 
     public void setComentarios(List<Comentarios> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public List<Calificaciones> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<Calificaciones> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 
 }

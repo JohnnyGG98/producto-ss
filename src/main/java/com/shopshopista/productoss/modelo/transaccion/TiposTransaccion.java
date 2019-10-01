@@ -39,19 +39,11 @@ public class TiposTransaccion implements Serializable {
     @Column(name = "titr_activo", nullable = false)
     private boolean titr_activo = true;
 
-    @JsonManagedReference(value = "cardex-tipo-transaccion")
+    @JsonManagedReference(value = "kardex-tipo-transaccion")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tipoTransaccion")
-    private List<Cardex> cardex;
+    private List<Kardex> kardex;
 
     public TiposTransaccion() {
-    }
-
-    public TiposTransaccion(Long id_tipo_transaccion, String titr_nombre, String titr_codigo, boolean titr_activo, List<Cardex> cardex) {
-        this.id_tipo_transaccion = id_tipo_transaccion;
-        this.titr_nombre = titr_nombre;
-        this.titr_codigo = titr_codigo;
-        this.titr_activo = titr_activo;
-        this.cardex = cardex;
     }
 
     public Long getId_tipo_transaccion() {
@@ -86,12 +78,12 @@ public class TiposTransaccion implements Serializable {
         this.titr_activo = titr_activo;
     }
 
-    public List<Cardex> getCardex() {
-        return cardex;
+    public List<Kardex> getKardex() {
+        return kardex;
     }
 
-    public void setCardex(List<Cardex> cardex) {
-        this.cardex = cardex;
+    public void setKardex(List<Kardex> kardex) {
+        this.kardex = kardex;
     }
 
 }

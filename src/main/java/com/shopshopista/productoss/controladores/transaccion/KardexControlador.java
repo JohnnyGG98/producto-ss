@@ -1,8 +1,7 @@
 package com.shopshopista.productoss.controladores.transaccion;
 
 
-import com.shopshopista.productoss.modelo.transaccion.Cardex;
-import com.shopshopista.productoss.repositorio.transaccion.CardexRepositorio;
+import com.shopshopista.productoss.modelo.transaccion.Kardex;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,29 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.shopshopista.productoss.repositorio.transaccion.KardexRepositorio;
 
 /**
  *
  * @author Linis
  */
 @RestController
-@RequestMapping("/api/v1/cardex")
+@RequestMapping("/api/v1/kardex")
 @CrossOrigin
-public class CardexControlador {
+public class KardexControlador {
     
     @Autowired
-    private CardexRepositorio cardexRepositorio;
+    private KardexRepositorio cardexRepositorio;
 
     @GetMapping("/")
     @CrossOrigin
-    public List<Cardex> getAllCardex() {
+    public List<Kardex> getAllCardex() {
         return this.cardexRepositorio.findAll();
     }
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Cardex createCardex(@RequestBody Cardex cardex) {
+    public Kardex createCardex(@RequestBody Kardex cardex) {
         return this.cardexRepositorio.save(cardex);
     }
 
@@ -43,13 +43,13 @@ public class CardexControlador {
     @ResponseBody
     @CrossOrigin
     public void eliminarCardex(@PathVariable Long idCardex) {
-        this.cardexRepositorio.eliminarByIdCardex(idCardex);
+        this.cardexRepositorio.eliminarByIdKardex(idCardex);
     }
 
     @GetMapping("/get{idCardex}")
     @ResponseBody
-    public Cardex getCardexById(@PathVariable Long idCardex) {
-        return this.cardexRepositorio.buscarPorIdCardex(idCardex);
+    public Kardex getCardexById(@PathVariable Long idCardex) {
+        return this.cardexRepositorio.buscarPorIdKardex(idCardex);
     }
 
     
