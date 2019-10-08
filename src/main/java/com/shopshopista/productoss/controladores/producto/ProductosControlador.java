@@ -77,4 +77,22 @@ public class ProductosControlador {
         return this.productoRepositorio.getForCategoria(idCategoria, limit, offset);
     }
     
+    @GetMapping("marca/{idMarca}")
+    public List<ProductoPage> getForMarcaAll(
+            @PathVariable Long idMarca,
+            @RequestParam(defaultValue = "10", required = false) int limit, 
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ){
+        return this.productoRepositorio.getForMarca(idMarca, limit, offset);
+    }
+    
+    @GetMapping("linea/{idLinea}")
+    public List<ProductoPage> getForLineaAll(
+            @PathVariable Long idLinea,
+            @RequestParam(defaultValue = "10", required = false) int limit, 
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ){
+        return this.productoRepositorio.getForMarca(idLinea, limit, offset);
+    }
+    
 }

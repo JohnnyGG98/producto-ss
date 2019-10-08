@@ -67,5 +67,30 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             @Param("limit") int limit, 
             @Param("offset") int offset
     );
+    
+    
+    @Query(
+            value = PRODUCTOPAGE_BQ 
+                    + " WHERE p.id_producto = :idLinea " 
+                    + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForLinea(
+            @Param("idLinea") long idLinea,
+            @Param("limit") int limit, 
+            @Param("offset") int offset
+    );
+    
+    @Query(
+            value = PRODUCTOPAGE_BQ 
+                    + " WHERE p.id_producto = :idMarca" 
+                    + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForMarca(
+            @Param("idMarca") long idMarca,
+            @Param("limit") int limit, 
+            @Param("offset") int offset
+    );
 
 }
