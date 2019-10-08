@@ -1,7 +1,5 @@
 package com.shopshopista.productoss.modelo.producto;
 
-import com.shopshopista.productoss.modelo.producto.Categorias;
-import com.shopshopista.productoss.modelo.producto.Productos;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.CascadeType;

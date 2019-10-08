@@ -41,7 +41,7 @@ public class Calificaciones implements Serializable {
     @Column(name = "id_cliente")
     private Long id_cliente;
 
-    @Column(name = "calificacion", columnDefinition = "NUMERIC(2, 2)")
+    @Column(name = "calificacion", columnDefinition = "NUMERIC(4, 2)")
     private Double calificacion;
 
     @Column(name = "cal_activo", columnDefinition = "BOOLEAN DEFAULT 'true'")

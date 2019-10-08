@@ -30,7 +30,8 @@ public class ComentariosControlador {
     @Autowired
     private ComentariosRepositorio comentarioRepositorio;
     
-    @Autowired ProductosRepositorio pr;
+    @Autowired 
+    private ProductosRepositorio pr;
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody

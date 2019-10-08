@@ -1,6 +1,7 @@
 package com.shopshopista.productoss.controladores.producto;
 
 import com.shopshopista.productoss.modelo.producto.Productos;
+import com.shopshopista.productoss.pojo.ProductoPage;
 import com.shopshopista.productoss.repositorio.producto.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,4 +53,28 @@ public class ProductosControlador {
     public Productos getProductoById(Long id_producto){
         return this.productoRepositorio.buscarProductosById(id_producto);
     }
+    
+    /**
+     * Consultamos productos para el inicio de la pagina WEB
+     * @param limit
+     * @param offset
+     * @return 
+     */
+    @GetMapping("home/all")
+    public List<ProductoPage> getForHomeAll(
+            @RequestParam(defaultValue = "10", required = false) int limit, 
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ){
+        return this.productoRepositorio.getForPage(limit, offset);
+    }
+    
+    @GetMapping("categoria/{idCategoria}")
+    public List<ProductoPage> getForCategoriaAll(
+            @PathVariable Long idCategoria,
+            @RequestParam(defaultValue = "10", required = false) int limit, 
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ){
+        return this.productoRepositorio.getForCategoria(idCategoria, limit, offset);
+    }
+    
 }
