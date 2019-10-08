@@ -1,8 +1,5 @@
 package com.shopshopista.productoss.pojo;
 
-import com.shopshopista.productoss.modelo.producto.Imagenes;
-import java.util.List;
-
 /**
  *
  * @author gus
