@@ -1,5 +1,6 @@
 package com.shopshopista.productoss.controladores.producto;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.shopshopista.productoss.modelo.producto.Productos;
 import com.shopshopista.productoss.pojo.ProductoPage;
 import com.shopshopista.productoss.repositorio.producto.ProductosRepositorio;
@@ -93,6 +94,25 @@ public class ProductosControlador {
             @RequestParam(defaultValue = "0", required = false) int offset
     ){
         return this.productoRepositorio.getForMarca(idLinea, limit, offset);
+    }
+    
+    @GetMapping("buscar/")
+    public List<ProductoPage> getForBusquedaAll(
+            @RequestParam(defaultValue = "", required = true) String aguja,
+            @RequestParam(defaultValue = "10", required = false) int limit, 
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ){
+        return this.productoRepositorio.getForBusqueda(aguja, limit, offset);
+    }
+    
+    
+    /**
+     * Solo lo cree para pruebas de consultas complejas en JPA
+     */
+    @GetMapping("json")
+    public void getJSON(){
+        JsonNode json = this.productoRepositorio.getJSON();
+        System.out.println(json);
     }
     
 }
