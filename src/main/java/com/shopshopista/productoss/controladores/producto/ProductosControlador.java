@@ -105,6 +105,10 @@ public class ProductosControlador {
         return this.productoRepositorio.getForBusqueda(aguja, limit, offset);
     }
     
+    @GetMapping("slide/")
+    public List<ProductoPage> getForSlide(){
+        return this.productoRepositorio.getForSlide(5, 0);
+    }
     
     /**
      * Solo lo cree para pruebas de consultas complejas en JPA

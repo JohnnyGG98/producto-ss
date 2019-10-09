@@ -122,6 +122,23 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
     );
 
     @Query(
+            value = PRODUCTOPAGE_BQ
+            + " WHERE p.id_producto IN ( "
+            + "  SELECT pc.id_producto "
+            + "  FROM producto.\"Productos\" pc "
+            + "  LEFT JOIN producto.\"Comentarios\" c ON pc.id_producto = c.id_producto "
+            + "  GROUP BY pc.id_producto "
+            + "  ORDER BY count(pc.id_producto) DESC "
+            + " ) "
+            + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForSlide(
+            @Param("limit") int limit,
+            @Param("offset") int offset
+    );
+
+    @Query(
             value = "SELECT array_to_json(\n"
             + "  array_agg(p.*)\n"
             + ") AS productos FROM (\n"
