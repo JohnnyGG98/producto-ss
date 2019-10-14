@@ -6,6 +6,7 @@
 package com.shopshopista.productoss.repositorio.producto;
 
 import com.shopshopista.productoss.modelo.producto.Comentarios;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,5 +27,7 @@ public interface ComentariosRepositorio extends JpaRepository<Comentarios, Long>
     @Modifying
     @Query(value = "UPDATE Comentarios c SET c.com_activo = false WHERE c.id_comentario = :idComentario ")
     Comentarios eliminarComentarios(@Param("idComentario") Long idComentario);
+     @Query(value = "SELECT c FROM Comentarios c WHERE c.producto.id_producto = :idProducto ")
+    List<Comentarios> buscarComentarioByIdPro(@Param("idProducto") Long idProducto);
 
 }
