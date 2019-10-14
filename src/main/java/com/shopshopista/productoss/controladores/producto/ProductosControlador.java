@@ -30,7 +30,7 @@ public class ProductosControlador {
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
     @CrossOrigin
-    public Productos guardar(@RequestBody @Valid Productos producto) {
+    public Productos guardar(@Valid @RequestBody Productos producto) {
         return this.productoRepositorio.save(producto);
     }
     
