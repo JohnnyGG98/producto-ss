@@ -36,4 +36,18 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
             + "FROM Categorias c ")
     List<CategoriaPage> getForPage();
 
+    @Query(value = "SELECT "
+            + "c.id_categoria AS id_categoria, "
+            + "c.cat_nombre AS cat_nombre,"
+            + "("
+            + "  SELECT count(id_producto) "
+            + "  FROM producto.\"ProductosCategorias\" pc "
+            + "  WHERE pc.id_categoria = c.id_categoria "
+            + ") AS num_productos "
+            + "FROM producto.\"Categorias\" c "
+            + "ORDER BY num_productos DESC LIMIT 4 OFFSET 0",
+            nativeQuery = true
+    )
+    List<CategoriaPage> getForHome();
+
 }

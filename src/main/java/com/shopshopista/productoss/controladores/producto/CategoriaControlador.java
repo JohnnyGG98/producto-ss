@@ -53,8 +53,13 @@ public class CategoriaControlador {
         return this.categoriaRepositorio.getOne(id);
     }
     
-    @GetMapping(path = "/page")
+    @GetMapping(path = "/home")
     public List<CategoriaPage> getHomeAll() {
+        return this.categoriaRepositorio.getForHome();
+    }
+    
+    @GetMapping(path = "/page")
+    public List<CategoriaPage> getPageAll() {
         return this.categoriaRepositorio.getForPage();
     }
 }
