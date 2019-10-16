@@ -52,9 +52,20 @@ public class CategoriaControlador {
     public Categorias seleccionarId(@PathVariable("id") Long id) {
         return this.categoriaRepositorio.getOne(id);
     }
-    
-    @GetMapping(path = "/page")
+
+    @GetMapping(path = "/home")
     public List<CategoriaPage> getHomeAll() {
-        return this.categoriaRepositorio.getForPage();
+        return this.categoriaRepositorio.getForHome();
     }
+
+    @GetMapping(path = "/page/{id}")
+    public List<CategoriaPage> getPageAll(@PathVariable("id") Long id) {
+        return this.categoriaRepositorio.getForPage(id);
+    }
+    
+    @GetMapping(path = "/cliente/{id}")
+    public List<CategoriaPage> getForCliente(@PathVariable("id") Long id) {
+        return this.categoriaRepositorio.getForCliente(Long.MIN_VALUE);
+    }
+            
 }
