@@ -1,7 +1,9 @@
 package com.shopshopista.productoss.controladores.producto;
 
 import com.shopshopista.productoss.modelo.producto.Calificaciones;
+import com.shopshopista.productoss.pojo.CalificacionesProductoRQ;
 import com.shopshopista.productoss.repositorio.producto.CalificacionesRepositori;
+import com.shopshopista.productoss.repositorio.producto.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/producto/calificacion")
 @CrossOrigin("*")
 public class CalificacionesControlador {
-    
+     @Autowired
+    ProductosRepositorio pr;
     @Autowired
     private CalificacionesRepositori CR;
     
@@ -34,8 +37,13 @@ public class CalificacionesControlador {
     
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
-    public Calificaciones guardar(@Valid @RequestBody Calificaciones c){
-        return this.CR.save(c);
+    public Calificaciones guardar(@Valid @RequestBody CalificacionesProductoRQ c){
+        Calificaciones cali=new Calificaciones();
+        cali.setCalificacion(c.getCalificacion());
+        cali.setId_cliente(c.getId_cliente());
+        cali.setId_calificacion(c.getId_calificacion());
+        cali.setProducto(pr.findById(c.getId_producto()).get());
+        return this.CR.save(cali);
     }
     
     @DeleteMapping("/eliminar/{idCalificacion}")

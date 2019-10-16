@@ -57,6 +57,12 @@ public class ComentariosControlador {
         System.out.println("Le pasamos: " + id);
         return this.comentarioRepositorio.findById(id).get();
     }
+ @RequestMapping(value = "/comentarioPro/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Comentarios> seleccionarIdPro(@Valid @PathVariable Long id) {
+        System.out.println("Le pasamos: " + id);
+        return this.comentarioRepositorio.buscarComentarioByIdPro(id);
+    }
 
     @PutMapping(path = {"/actualizar/{id_comentario}"})
     public Comentarios actualizar(@RequestBody Comentarios v, @PathVariable("id_comentario") Long id_comentario) {
@@ -68,4 +74,5 @@ public class ComentariosControlador {
     public void borrar(@PathVariable Long id_comentario) {
         this.comentarioRepositorio.deleteById(id_comentario);
     }
+    
 }

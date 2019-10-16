@@ -28,12 +28,6 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
     @Query(value = "SELECT "
             + "c.id_categoria AS id_categoria, "
             + "c.cat_nombre AS cat_nombre "
-            + "FROM Categorias c ")
-    List<CategoriaPage> getForHome();
-
-    @Query(value = "SELECT "
-            + "c.id_categoria AS id_categoria, "
-            + "c.cat_nombre AS cat_nombre "
             + "FROM producto.\"Categorias\" c "
             + "WHERE c.id_categoria NOT IN ( "
             + " SELECT id_categoria "
@@ -42,6 +36,18 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
             + ")",
             nativeQuery = true)
     List<CategoriaPage> getForPage(@Param("idCliente") Long idCliente);
+
+    @Query(value = "SELECT "
+            + "c.id_categoria AS id_categoria, "
+            + "c.cat_nombre AS cat_nombre,"
+            + "("
+            + "  SELECT count(id_producto) "
+            + "  FROM producto.\"ProductosCategorias\" pc "
+            + "  WHERE pc.id_categoria = c.id_categoria "
+            + ") AS num_productos "
+            + "FROM producto.\"Categorias\" c ",
+            nativeQuery = true)
+    List<CategoriaPage> getForPage();
 
     @Query(value = "SELECT "
             + "c.id_categoria AS id_categoria, "
@@ -54,5 +60,19 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
             + ")",
             nativeQuery = true)
     List<CategoriaPage> getForCliente(@Param("idCliente") Long idCliente);
+
+    @Query(value = "SELECT "
+            + "c.id_categoria AS id_categoria, "
+            + "c.cat_nombre AS cat_nombre,"
+            + "("
+            + "  SELECT count(id_producto) "
+            + "  FROM producto.\"ProductosCategorias\" pc "
+            + "  WHERE pc.id_categoria = c.id_categoria "
+            + ") AS num_productos "
+            + "FROM producto.\"Categorias\" c "
+            + "ORDER BY num_productos DESC LIMIT 4 OFFSET 0",
+            nativeQuery = true
+    )
+    List<CategoriaPage> getForHome();
 
 }
