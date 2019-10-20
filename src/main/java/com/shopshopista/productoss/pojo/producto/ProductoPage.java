@@ -6,15 +6,15 @@ package com.shopshopista.productoss.pojo.producto;
  */
 public interface ProductoPage {
 
-    public int getId_producto();
+    long getId_producto();
 
-    public int getId_vendedor();
-    
-    public String getProd_nombre();
+    long getId_vendedor();
 
-    public double getProd_precio_venta();
+    String getProd_nombre();
 
-    public double getCalificacion();
-    
+    double getProd_precio_venta();
+
+    double getCalificacion();
+
     String getIma_url();
 }

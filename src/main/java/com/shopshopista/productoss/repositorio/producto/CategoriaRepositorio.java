@@ -55,6 +55,18 @@ public interface CategoriaRepositorio extends JpaRepository<Categorias, Long> {
             + "FROM producto.\"Categorias\" c "
             + "WHERE c.id_categoria IN ( "
             + " SELECT id_categoria "
+            + " FROM producto.\"ProductosCategorias\" pc "
+            + " WHERE pc.id_producto = :idProducto "
+            + ") ",
+            nativeQuery = true)
+    List<CategoriaPage> getForProducto(@Param("idProducto") Long idProducto);
+
+    @Query(value = "SELECT "
+            + "c.id_categoria AS id_categoria, "
+            + "c.cat_nombre AS cat_nombre "
+            + "FROM producto.\"Categorias\" c "
+            + "WHERE c.id_categoria IN ( "
+            + " SELECT id_categoria "
             + " FROM human.\"Preferencias\" p "
             + " WHERE p.id_cliente = :idCliente  "
             + ")",

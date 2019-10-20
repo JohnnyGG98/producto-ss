@@ -2,7 +2,9 @@ package com.shopshopista.productoss.controladores.producto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.shopshopista.productoss.modelo.producto.Productos;
+import com.shopshopista.productoss.pojo.producto.ProductoDetalleRP;
 import com.shopshopista.productoss.pojo.producto.ProductoPage;
+import com.shopshopista.productoss.repositorio.producto.CategoriaRepositorio;
 import com.shopshopista.productoss.repositorio.producto.ProductosRepositorio;
 import java.util.List;
 import javax.validation.Valid;
@@ -29,6 +31,9 @@ public class ProductosControlador {
 
     @Autowired
     private ProductosRepositorio productoRepositorio;
+
+    @Autowired
+    private CategoriaRepositorio CR;
 
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     @ResponseBody
@@ -127,6 +132,14 @@ public class ProductosControlador {
             @RequestParam(defaultValue = "0", required = false) int offset
     ) {
         return this.productoRepositorio.getForProducto(limit, offset, idProducto);
+    }
+
+    @GetMapping("detalle/{idProducto}")
+    public ProductoDetalleRP getForDetalle(@PathVariable Long idProducto) {
+        return new ProductoDetalleRP(
+                productoRepositorio.getProductoForDescripcion(idProducto),
+                CR.getForProducto(idProducto)
+        );
     }
 
     /**
