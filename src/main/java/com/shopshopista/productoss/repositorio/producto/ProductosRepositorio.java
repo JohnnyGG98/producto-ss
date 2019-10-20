@@ -2,7 +2,7 @@ package com.shopshopista.productoss.repositorio.producto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.shopshopista.productoss.modelo.producto.Productos;
-import com.shopshopista.productoss.pojo.ProductoPage;
+import com.shopshopista.productoss.pojo.producto.ProductoPage;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -136,6 +136,46 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
     List<ProductoPage> getForSlide(
             @Param("limit") int limit,
             @Param("offset") int offset
+    );
+
+    @Query(
+            value = PRODUCTOPAGE_BQ
+            + " WHERE p.id_producto IN ( "
+            + "  SELECT id_producto "
+            + "  FROM producto.\"ProductosCategoria\" pc "
+            + "  WHERE pc.id_categoria IN ( "
+            + "   SELECT id_categoria "
+            + "   FROM human.\"Preferencias\" pr "
+            + "   WHERE pr.id_cliente = :idCliente "
+            + "  ) "
+            + " ) "
+            + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForCliente(
+            @Param("limit") int limit,
+            @Param("offset") int offset,
+            @Param("idCliente") long idCliente
+    );
+    
+    @Query(
+            value = PRODUCTOPAGE_BQ
+            + " WHERE p.id_producto IN ( "
+            + "  SELECT id_producto "
+            + "  FROM producto.\"ProductosCategoria\" pc "
+            + "  WHERE pc.id_categoria IN ( "
+            + "   SELECT id_categoria "
+            + "   FROM producto.\"ProductosCategoria\" pcp "
+            + "   WHERE pcp.id_producto = :idProducto"
+            + "  ) "
+            + " ) "
+            + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForProducto(
+            @Param("limit") int limit,
+            @Param("offset") int offset,
+            @Param("idProducto") long idProducto
     );
 
     @Query(

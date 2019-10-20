@@ -48,18 +48,24 @@ public class CategoriaControlador {
         this.categoriaRepositorio.eliminarCategoria(id_categoria);
     }
 
-    @GetMapping(path = {"/{id}"})
-    public Categorias seleccionarId(@PathVariable("id") Long id) {
-        return this.categoriaRepositorio.getOne(id);
+    @GetMapping(path = {"/{idCategoria}"})
+    public Categorias seleccionarId(@PathVariable("id") Long idCategoria) {
+        return this.categoriaRepositorio.getOne(idCategoria);
     }
-    
+
     @GetMapping(path = "/home")
     public List<CategoriaPage> getHomeAll() {
         return this.categoriaRepositorio.getForHome();
     }
-    
-    @GetMapping(path = "/page")
-    public List<CategoriaPage> getPageAll() {
-        return this.categoriaRepositorio.getForPage();
+
+    @GetMapping(path = "/page/{idCliente}")
+    public List<CategoriaPage> getPageAll(@PathVariable("idCliente") Long idCliente) {
+        return this.categoriaRepositorio.getForPage(idCliente);
     }
+    
+    @GetMapping(path = "/cliente/{idCliente}")
+    public List<CategoriaPage> getForCliente(@PathVariable("idCliente") Long idCliente) {
+        return this.categoriaRepositorio.getForCliente(idCliente);
+    }
+            
 }
