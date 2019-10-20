@@ -2,6 +2,7 @@ package com.shopshopista.productoss.repositorio.producto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.shopshopista.productoss.modelo.producto.Productos;
+import com.shopshopista.productoss.pojo.producto.ProductoDescripcion;
 import com.shopshopista.productoss.pojo.producto.ProductoPage;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -142,7 +143,7 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             value = PRODUCTOPAGE_BQ
             + " WHERE p.id_producto IN ( "
             + "  SELECT id_producto "
-            + "  FROM producto.\"ProductosCategoria\" pc "
+            + "  FROM producto.\"ProductosCategorias\" pc "
             + "  WHERE pc.id_categoria IN ( "
             + "   SELECT id_categoria "
             + "   FROM human.\"Preferencias\" pr "
@@ -157,15 +158,15 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             @Param("offset") int offset,
             @Param("idCliente") long idCliente
     );
-    
+
     @Query(
             value = PRODUCTOPAGE_BQ
             + " WHERE p.id_producto IN ( "
             + "  SELECT id_producto "
-            + "  FROM producto.\"ProductosCategoria\" pc "
+            + "  FROM producto.\"ProductosCategorias\" pc "
             + "  WHERE pc.id_categoria IN ( "
             + "   SELECT id_categoria "
-            + "   FROM producto.\"ProductosCategoria\" pcp "
+            + "   FROM producto.\"ProductosCategorias\" pcp "
             + "   WHERE pcp.id_producto = :idProducto"
             + "  ) "
             + " ) "
@@ -177,6 +178,35 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             @Param("offset") int offset,
             @Param("idProducto") long idProducto
     );
+
+    @Query(value = "SELECT "
+            + "p.id_producto AS id_producto, "
+            + "p.id_vendedor AS id_vendedor, "
+            + "p.prod_nombre AS prod_nombre, "
+            + "p.prod_precio_venta AS prod_precio_venta, ("
+            + "SELECT COALESCE( SUM(c.calificacion), 0.1 )"
+            + "FROM producto.\"Calificaciones\" c "
+            + "WHERE c.id_producto = p.id_producto "
+            + ") AS calificacion, ("
+            + " SELECT COALESCE(ima_url, 'no image') FROM producto.\"Imagenes\" i "
+            + " WHERE i.id_producto = p.id_producto AND "
+            + " i.ima_principal = true "
+            + ") AS ima_url, "
+            + "m.id_marca AS id_marca, "
+            + "m.marc_nombre AS marc_nombre, "
+            + "l.id_linea AS id_linea, "
+            + "l.lin_nombre AS lin_nombre, ("
+            + " SELECT COALESCE (per_primer_nombre || ' ' || "
+            + " per_primer_apellido, 'SV' )"
+            + " FROM human.\"Personas\" "
+            + " WHERE id_persona = p.id_vendedor "
+            + ") AS vendedor "
+            + "FROM producto.\"Productos\" p "
+            + "JOIN producto.\"Marcas\" m ON m.id_marca = p.id_marca "
+            + "JOIN producto.\"Lineas\"l ON l.id_linea = p.id_linea "
+            + "WHERE p.id_producto = :idProducto ",
+            nativeQuery = true)
+    ProductoDescripcion getProductoForDescripcion(@Param("idProducto") long idProducto);
 
     @Query(
             value = "SELECT array_to_json(\n"

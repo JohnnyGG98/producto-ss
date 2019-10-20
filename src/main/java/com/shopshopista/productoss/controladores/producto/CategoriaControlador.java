@@ -57,6 +57,11 @@ public class CategoriaControlador {
     public List<CategoriaPage> getHomeAll() {
         return this.categoriaRepositorio.getForHome();
     }
+    
+    @GetMapping(path = "/page")
+    public List<CategoriaPage> getPageAll() {
+        return this.categoriaRepositorio.getForPage();
+    }
 
     @GetMapping(path = "/page/{idCliente}")
     public List<CategoriaPage> getPageAll(@PathVariable("idCliente") Long idCliente) {
