@@ -56,7 +56,7 @@ public class ProductosControlador {
 
     @GetMapping("/productobyid/{id_producto}")
     @CrossOrigin
-    public Productos getProductoById(Long id_producto) {
+    public Productos getProductoById(@PathVariable Long id_producto){
         return this.productoRepositorio.buscarProductosById(id_producto);
     }
 

@@ -49,7 +49,8 @@ public class CategoriaControlador {
     }
 
     @GetMapping(path = {"/{idCategoria}"})
-    public Categorias seleccionarId(@PathVariable("id") Long idCategoria) {
+    @CrossOrigin
+    public Categorias seleccionarId(@PathVariable("idCategoria") Long idCategoria) {
         return this.categoriaRepositorio.getOne(idCategoria);
     }
 
