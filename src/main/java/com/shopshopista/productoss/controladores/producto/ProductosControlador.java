@@ -101,6 +101,16 @@ public class ProductosControlador {
     ) {
         return this.productoRepositorio.getForMarca(idLinea, limit, offset);
     }
+    
+    @GetMapping("vendedor/{idVendedor}")
+    public List<ProductoPage> getForVendedor(
+            @PathVariable Long idVendedor,
+            @RequestParam(defaultValue = "10", required = false) int limit,
+            @RequestParam(defaultValue = "0", required = false) int offset
+    ) {
+        return this.productoRepositorio.getForVendedor(idVendedor, limit, offset);
+    }
+
 
     @GetMapping("buscar/")
     public List<ProductoPage> getForBusquedaAll(

@@ -95,6 +95,18 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
 
     @Query(
             value = PRODUCTOPAGE_BQ
+            + " WHERE p.id_vendedor = :idVendedor"
+            + PRODCUTOPAGE_EQ,
+            nativeQuery = true
+    )
+    List<ProductoPage> getForVendedor(
+            @Param("idVendedor") long idVendedor,
+            @Param("limit") int limit,
+            @Param("offset") int offset
+    );
+
+    @Query(
+            value = PRODUCTOPAGE_BQ
             + " WHERE p.prod_nombre ILIKE  %:aguja% OR "
             + " p.prod_descripcion ILIKE %:aguja% OR "
             + " p.id_producto IN ( "
