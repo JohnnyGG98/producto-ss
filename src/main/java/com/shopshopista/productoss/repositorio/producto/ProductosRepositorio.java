@@ -32,7 +32,8 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             + " SELECT COALESCE(ima_url, 'no image') FROM producto.\"Imagenes\" i "
             + " WHERE i.id_producto = p.id_producto AND "
             + " i.ima_principal = true "
-            + ") AS ima_url "
+            + ") AS ima_url, "
+            + "p.prod_tiene_iva AS tiene_iva "
             + "FROM producto.\"Productos\" p ";
 
     static final String PRODCUTOPAGE_EQ = " ORDER BY calificacion DESC LIMIT :limit OFFSET :offset ";
@@ -190,6 +191,13 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
             @Param("offset") int offset,
             @Param("idProducto") long idProducto
     );
+
+    @Query(
+            value = PRODUCTOPAGE_BQ
+            + " WHERE p.id_producto = :idProducto ",
+            nativeQuery = true
+    )
+    ProductoPage getOnePorId(@Param("idProducto") long idProducto);
 
     @Query(value = "SELECT "
             + "p.id_producto AS id_producto, "

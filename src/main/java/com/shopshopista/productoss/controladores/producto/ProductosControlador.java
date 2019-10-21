@@ -56,7 +56,7 @@ public class ProductosControlador {
 
     @GetMapping("/productobyid/{id_producto}")
     @CrossOrigin
-    public Productos getProductoById(@PathVariable Long id_producto){
+    public Productos getProductoById(@PathVariable Long id_producto) {
         return this.productoRepositorio.buscarProductosById(id_producto);
     }
 
@@ -101,7 +101,7 @@ public class ProductosControlador {
     ) {
         return this.productoRepositorio.getForMarca(idLinea, limit, offset);
     }
-    
+
     @GetMapping("vendedor/{idVendedor}")
     public List<ProductoPage> getForVendedor(
             @PathVariable Long idVendedor,
@@ -110,7 +110,6 @@ public class ProductosControlador {
     ) {
         return this.productoRepositorio.getForVendedor(idVendedor, limit, offset);
     }
-
 
     @GetMapping("buscar/")
     public List<ProductoPage> getForBusquedaAll(
@@ -150,6 +149,11 @@ public class ProductosControlador {
                 productoRepositorio.getProductoForDescripcion(idProducto),
                 CR.getForProducto(idProducto)
         );
+    }
+
+    @GetMapping("page/{idProducto}")
+    public ProductoPage getOnePorId(@PathVariable Long idProducto) {
+        return this.productoRepositorio.getOnePorId(idProducto);
     }
 
     /**
