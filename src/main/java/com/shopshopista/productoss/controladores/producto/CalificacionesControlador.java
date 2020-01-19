@@ -50,5 +50,10 @@ public class CalificacionesControlador {
     public void eliminar(@PathVariable long idCalificacion){
         this.CR.eliminarCalificacion(idCalificacion);
     }
-    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Calificaciones seleccionarId(@Valid @PathVariable Long id) {
+        System.out.println("Le pasamos: " + id);
+        return this.CR.findById(id).get();
+    }
 }
